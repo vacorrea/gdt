@@ -21,7 +21,7 @@ import in.me.gdt.domain.UserService;
 public class ApplicationTests {
 
 	@Autowired private UserService userService;
-	private Logger logger = Logger.getLogger(GdtApplicationTests.class.getName());
+	private Logger logger = Logger.getLogger(ApplicationTests.class.getName());
 	
 	@Test
 	public void givenUserCreationTest() {
