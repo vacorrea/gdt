@@ -1,14 +1,8 @@
 package in.me.gdt.domain;
 
-import java.util.logging.Logger;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class UserService {
-    Logger logger = Logger.getLogger(UserService.class.toString());
-
-    public void repositoryActionTest() {
-        logger.info("action succeded");    
-    }
+public interface UserService extends JpaRepository<UserPrincipal, Long>{
+    UserPrincipal findByUserName(String name);
 }
