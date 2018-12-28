@@ -23,14 +23,19 @@ public class GdtApplicationTests {
 	@Autowired private UserService userService;
 	private Logger logger = Logger.getLogger(GdtApplicationTests.class.getName());
 	
-
 	@Test
-	public void contextLoads() {
+	public void givenUserCreationTest() {
 		userService.save(UserPrincipalBuilder.newInstance().userName("jax").userPasswdHash("hxcsao1283").build());
 		UserPrincipal up = userService.findByUserName("jax");
 		Optional<UserPrincipal> b = userService.findById(1L);
 		Assert.assertTrue(b.isPresent());
 		Assert.assertNotNull(up);	
+		logger.info(b.get().getUserName());
+	}
+	@Test
+	public void givenNullUserErrorTest() {
+		Optional<UserPrincipal> oup = userService.findById(9999999L);
+		Assert.assertTrue(oup.isPresent());
 	}
 	
 }
