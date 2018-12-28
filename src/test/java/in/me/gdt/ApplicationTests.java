@@ -14,7 +14,7 @@ import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserPrincipalBuilder;
 import in.me.gdt.domain.UserService;
 
-
+// ssl test https://github.com/eugenp/tutorials/blob/master/spring-security-mvc-boot/src/test/java/org/baeldung/web/HttpsApplicationIntegrationTest.java
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
