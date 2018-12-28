@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GdtApplication {
 	
 	@Autowired private RestService restService;
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(GdtApplication.class, args);
 	}
