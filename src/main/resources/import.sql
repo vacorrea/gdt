@@ -1,3 +1,3 @@
--- INSERT INTO USERPRINCIPAL VALUES(1,"jax teller", "jax@yahoo.com");
--- INSERT INTO USERPRINCIPAL VALUES(1,"roman polansky", "rompo@gmail.com");
--- INSERT INTO USERPRINCIPAL VALUES(1,"anne hataway", "anne@live.com");
+-- INSERT INTO user_principal (id, user_name, user_passwd_hash) VALUES(1,"jax teller", "jax@yahoo.com");
+-- INSERT INTO user_principal (id, user_name, user_passwd_hash) VALUES(1,"roman polansky", "rompo@gmail.com");
+-- INSERT INTO user_principal (id, user_name, user_passwd_hash) VALUES(1,"anne hataway", "anne@live.com");
