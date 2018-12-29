@@ -1,9 +1,42 @@
 ---
 - name: redis
   hosts: lnx.me.in
-  
+  become: yes
+  become_user: root
+  become_method: su
 
   tasks:
     - name: echo redis
       shell: echo "hello world redis"
+    
+    - name: create redis user
+      user:
+        name: redis            
+        password: $6$Sbb.AMUP33a8c/Xw$EjLc9FHHPxuHRKv7EystNlFIWAvgYVMFvMxzBEOyBtKvNpkkDo5Et0Iil8OxHZIFzy9Cw8TDchs2uY7WSPZDo/
+        create_home: no
+        state: present
+
+    - name: create server dir
+      file: 
+        path: /srv/
+        owner: redis
+        group: redis
         
+    - name: download redis
+      get_url:
+          url: http://download.redis.io/redis-stable.tar.gz  
+          dest: /srv/redis-stable.tar.gz
+          checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
+          
+    - name: untar redis
+      unarchive: 
+        src: /srv/redis-stable.tar.gz  
+        dest: /srv/
+    - name: change permissions
+      file: 
+        path: /srv/redis-stable
+        owner: redis
+        group: redis
+    - name: change dir to make
+      command: chdir=/srv/redis-stable make
+    
