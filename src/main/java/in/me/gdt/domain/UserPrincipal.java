@@ -1,5 +1,7 @@
 package in.me.gdt.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,10 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name="userSequence", initialValue=1, allocationSize=100)
-public class UserPrincipal {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO, generator="userSequence")
+public class UserPrincipal implements Serializable {
+    private static final long serialVersionUID = -4290418206362158950L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "userSequence")
     private Long id;
     @Column(nullable = false, unique = true)
     private String userName;
