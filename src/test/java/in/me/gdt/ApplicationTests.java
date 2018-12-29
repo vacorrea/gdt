@@ -1,5 +1,6 @@
 package in.me.gdt;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -20,9 +21,15 @@ public class ApplicationTests {
 
 	@Autowired private UserService userService;
 	private Logger logger = Logger.getLogger(ApplicationTests.class.getName());
-	
-	@Test
-	public void givenUserCreationTest() {
+    
+    @Test public void databaseTest() {
+        logger.info("databaseTest \n\n");
+        List<UserPrincipal> upList = userService.findAll();
+        for (UserPrincipal var : upList) 
+            logger.info(var.toString());
+    }
+    
+	@Test public void givenUserCreationTest() {
         userService.save(UserPrincipalBuilder.newInstance().userName("max").userPasswdHash("hxcsao1283").build());
         UserPrincipal up = userService.findByUserName("max");
         Assert.assertNotNull(up);
