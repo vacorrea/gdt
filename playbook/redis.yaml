@@ -18,25 +18,25 @@
 
     - name: create server dir
       file: 
-        path: /srv/
+        path: /usr/srv/
         owner: redis
         group: redis
         
     - name: download redis
       get_url:
           url: http://download.redis.io/redis-stable.tar.gz  
-          dest: /srv/redis-stable.tar.gz
+          dest: /usr/srv/redis-stable.tar.gz
           checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
           
     - name: untar redis
       unarchive: 
-        src: /srv/redis-stable.tar.gz  
-        dest: /srv/
+        src: /usr/srv/redis-stable.tar.gz  
+        dest: /usr/srv/
     - name: change permissions
       file: 
-        path: /srv/redis-stable
+        path: /usr/srv/redis-stable
         owner: redis
         group: redis
     - name: change dir to make
-      command: chdir=/srv/redis-stable make
+      command: chdir=/usr/srv/redis-stable make
     
