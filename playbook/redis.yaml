@@ -28,11 +28,21 @@
           url: http://download.redis.io/redis-stable.tar.gz  
           dest: /usr/srv/redis/redis-stable.tar.gz
           checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
+    - name: download redis conf
+      get_url:
+          url: https://gist.githubusercontent.com/vacorrea/678cdfaf5a21a28ec2df393978bb5bfa/raw/078a10349f8ff87e5137d42432ef27d34edc11cc/redis.conf
+          dest: /usr/srv/redis/redis.conf
+          checksum: sha256:bb9bddae60a7ea916ceccfd47af7b07bccc706796176436690f2cc9c5bc39e18
+    - name: change conf perm
+      file: 
+        path: /usr/srv/redis/redis.conf
+        owner: redis
+        group: redis
     - name: download systemd script
       get_url: 
           url: https://gist.githubusercontent.com/vacorrea/c5794562080a25125b9bdf621aad6ac3/raw/9fab5d699dcbd067dc64cd4637e8b658c35ea131/redis.service
           dest: /etc/systemd/system/redis.service
-          checksum: sha256:ddad6fe9fc2dca6dcca51c817a219bcac35cfdec5333dd6f682f83f0223838cf          
+          checksum: sha256:daef5019b8c4e90282f293fce99aaafe75257773b4ed7e0a9f7bdb913c6e63f7                    
     - name: daemons reload
       shell: systemctl daemon-reload
 
