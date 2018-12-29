@@ -1,6 +1,11 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+/playbook/*.retry
+
+# vscode
+.vscode/
+
 ### STS ###
 .apt_generated
 .classpath
