@@ -18,25 +18,42 @@
 
     - name: create server dir
       file: 
-        path: /usr/srv/
+        path: /usr/srv/redis
         owner: redis
         group: redis
+        state: directory
         
     - name: download redis
       get_url:
           url: http://download.redis.io/redis-stable.tar.gz  
-          dest: /usr/srv/redis-stable.tar.gz
+          dest: /usr/srv/redis/redis-stable.tar.gz
           checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
-          
+    - name: download systemd script
+      get_url: 
+          url: https://gist.githubusercontent.com/vacorrea/c5794562080a25125b9bdf621aad6ac3/raw/9fab5d699dcbd067dc64cd4637e8b658c35ea131/redis.service
+          dest: /etc/systemd/system/redis.service
+          checksum: sha256:ddad6fe9fc2dca6dcca51c817a219bcac35cfdec5333dd6f682f83f0223838cf          
+    - name: daemons reload
+      shell: systemctl daemon-reload
+
     - name: untar redis
       unarchive: 
-        src: /usr/srv/redis-stable.tar.gz  
-        dest: /usr/srv/
+        src: /usr/srv/redis/redis-stable.tar.gz  
+        dest: /usr/srv/redis
     - name: change permissions
       file: 
-        path: /usr/srv/redis-stable
+        path: /usr/srv/redis/redis-stable
         owner: redis
         group: redis
     - name: change dir to make
-      command: chdir=/usr/srv/redis-stable make
+      command: chdir=/usr/srv/redis/redis-stable make
+    - name: change dir to make test
+      command: chdir=/usr/srv/redis/redis-stable make test
+    
+    - name: start redis service
+      systemd:
+          state: started
+          name: redis
+
+
     
