@@ -14,8 +14,6 @@ import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserPrincipalBuilder;
 import in.me.gdt.domain.UserService;
 
-// ssl test https://github.com/eugenp/tutorials/blob/master/spring-security-mvc-boot/src/test/java/org/baeldung/web/HttpsApplicationIntegrationTest.java
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {
@@ -25,11 +23,13 @@ public class ApplicationTests {
 	
 	@Test
 	public void givenUserCreationTest() {
-		userService.save(UserPrincipalBuilder.newInstance().userName("jax").userPasswdHash("hxcsao1283").build());
-		UserPrincipal up = userService.findByUserName("jax");
+        userService.save(UserPrincipalBuilder.newInstance().userName("max").userPasswdHash("hxcsao1283").build());
+        UserPrincipal up = userService.findByUserName("max");
+        Assert.assertNotNull(up);
+        Assert.assertEquals("max", up.getUserName());
+		
 		Optional<UserPrincipal> b = userService.findById(1L);
 		Assert.assertTrue(b.isPresent());
-		Assert.assertNotNull(up);	
 		logger.info(b.get().getUserName());
 	}
 	@Test
