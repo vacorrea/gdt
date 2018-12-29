@@ -8,8 +8,15 @@ import org.springframework.data.redis.core.RedisHash;
 public class UserCredentials implements Serializable{
     private static final long serialVersionUID = 1L;
 
+    private Long id;
     private String password;
-    
+        
+    public Long getId() {
+        return id;
+    }    
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getPassword() {
         return password;
     }    

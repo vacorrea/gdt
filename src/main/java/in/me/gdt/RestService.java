@@ -1,8 +1,9 @@
 package in.me.gdt;
 
 import java.util.Optional;
-import java.util.logging.Logger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,9 @@ import in.me.gdt.domain.UserService;
 @RestController
 @RequestMapping(value="/")
 public class RestService {
-    private Logger logger = Logger.getLogger(RestService.class.getName());
-    @Autowired UserService userService;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());    
+    @Autowired private UserService userService;
+    
     @RequestMapping(method=RequestMethod.GET, value="/action")
     public ResponseEntity<String> actionRequest(@RequestParam(value="userName", defaultValue="action") String userName) {
         logger.info(userName);
@@ -29,5 +31,5 @@ public class RestService {
         Optional<UserPrincipal> oup = userService.findById(id);        
         return oup.get();
     }
-
+    
 }
