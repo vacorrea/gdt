@@ -20,15 +20,23 @@ import in.me.gdt.domain.UserService;
 public class RestService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
     @Autowired private UserService userService;
+
+    // TODO BCryptPasswordEncoder passwordEncoder; 
     
-    @RequestMapping(method=RequestMethod.GET, value="/action")
-    public ResponseEntity<String> actionRequest(@RequestParam(value="userName", defaultValue="action") String userName) {
+    @RequestMapping(method=RequestMethod.GET, value="/login")
+    public ResponseEntity<String> actionRequest(@RequestParam(value="fieldName", defaultValue="field") String fieldNameParameter) {
+        logger.info(fieldNameParameter);
+        return ResponseEntity.status(HttpStatus.OK).body(userName);
+    }
+
+    @RequestMapping(method=RequestMethod.GET, value="/login")
+    public ResponseEntity<String> loginRequest(@RequestParam(value="userName", defaultValue="login") String userName) {
         logger.info(userName);
         return ResponseEntity.status(HttpStatus.OK).body(userName);
     }
     @RequestMapping(method=RequestMethod.GET, value="/load")
     public UserPrincipal userPrincipalRequest(@RequestParam(value="id") Long id) {
-        Optional<UserPrincipal> oup = userService.findById(id);        
+        Optional<UserPrincipal> oup = userService.findById(id);                
         return oup.get();
     }
     

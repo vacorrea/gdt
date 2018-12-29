@@ -1,0 +1,9 @@
+---
+- name: redis
+  hosts: lnx.me.in
+  
+
+  tasks:
+    - name: echo redis
+      shell: echo "hello world redis"
+        

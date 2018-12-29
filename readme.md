@@ -9,3 +9,7 @@ keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 -keys
 # list
 keytool -list -v
 keytool -list -v -storetype pkcs12 -keystore keystore.p12
+
+
+# ansible playbooks 
+ansible-playbook -i /etc/ansible/hosts  Desktop/area51/playbooks/ocp10.yaml  -u root
