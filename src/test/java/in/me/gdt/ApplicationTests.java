@@ -18,7 +18,7 @@ import in.me.gdt.domain.UserService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ApplicationTests {
-
+	
 	@Autowired private UserService userService;
 	private Logger logger = Logger.getLogger(ApplicationTests.class.getName());
     
@@ -29,7 +29,7 @@ public class ApplicationTests {
             logger.info(var.toString());
     }
     
-	@Test public void givenUserCreationTest() {
+	@Test public void whenUserCreationTest() {
         userService.save(UserPrincipalBuilder.newInstance().userName("max").userPasswdHash("hxcsao1283").build());
         UserPrincipal up = userService.findByUserName("max");
         Assert.assertNotNull(up);
@@ -40,7 +40,7 @@ public class ApplicationTests {
 		logger.info(b.get().getUserName());
 	}
 	@Test
-	public void givenNullUserErrorTest() {
+	public void whenUserDoesntExistsTest() {
 		Optional<UserPrincipal> oup = userService.findById(9999999L);
 		Assert.assertFalse(oup.isPresent());
 	}

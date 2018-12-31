@@ -23,7 +23,7 @@ public class RestService {
 
     // TODO BCryptPasswordEncoder passwordEncoder; 
     
-    @RequestMapping(method=RequestMethod.GET, value="/login")
+    @RequestMapping(method=RequestMethod.GET, value="/action")
     public ResponseEntity<String> actionRequest(@RequestParam(value="fieldName", defaultValue="field") String fieldNameParameter) {
         logger.info(fieldNameParameter);
         return ResponseEntity.status(HttpStatus.OK).body(fieldNameParameter);

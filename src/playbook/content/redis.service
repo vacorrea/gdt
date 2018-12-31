@@ -1,0 +1,11 @@
+[Unit]
+Description= redis
+Requires=network.target
+After=syslog.target network.target
+[Service]
+EnvironmentFile=/usr/srv/redis/redis.conf
+ExecStart=/usr/srv/redis/redis-stable/src/redis-server  /usr/srv/redis/redis.conf
+ExecStop=/usr/srv/redis/redis-cli shutdown
+User=redis
+[Install]
+WantedBy=multi-user.target
