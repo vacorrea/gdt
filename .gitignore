@@ -3,6 +3,8 @@
 
 /playbook/*.retry
 
+src/docs/css/*.css
+
 # vscode
 .vscode/
 

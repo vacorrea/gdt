@@ -22,7 +22,12 @@
         owner: redis
         group: redis
         state: directory
-        
+
+    - name: upgrade packages
+      dnf:
+        name: "*"
+        state: latest    
+
     - name: download redis
       get_url:
           url: http://download.redis.io/redis-stable.tar.gz  
@@ -30,16 +35,19 @@
           owner: redis
           group: redis
           checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
+
     - name: download redis conf
       get_url:
           url: https://gist.githubusercontent.com/vacorrea/678cdfaf5a21a28ec2df393978bb5bfa/raw/078a10349f8ff87e5137d42432ef27d34edc11cc/redis.conf
           dest: /usr/srv/redis/redis.conf
           checksum: sha256:bb9bddae60a7ea916ceccfd47af7b07bccc706796176436690f2cc9c5bc39e18
+
     - name: change conf perm
       file: 
         path: /usr/srv/redis/redis.conf
         owner: redis
         group: redis
+
     - name: download systemd script
       get_url: 
           url: https://gist.githubusercontent.com/vacorrea/c5794562080a25125b9bdf621aad6ac3/raw/3b39149d6e37ba5175bce8773dc3c783b5c3cad2/redis.service
@@ -57,6 +65,11 @@
         path: /usr/srv/redis/redis-stable
         owner: redis
         group: redis
+        
+    - name: install @cdev packages
+      dnf:
+        name: @c-development
+        state: latest
     - name: change dir to make
       command: chdir=/usr/srv/redis/redis-stable make
     - name: change dir to make test

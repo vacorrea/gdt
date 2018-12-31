@@ -8,7 +8,6 @@
   tasks:
     - name: echo config
       shell: echo "hello config"
-
 - name: install postgresql server
   import_playbook: postgresql.yaml
 - name: install redis server
