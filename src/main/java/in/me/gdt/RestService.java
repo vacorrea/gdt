@@ -26,7 +26,7 @@ public class RestService {
     @RequestMapping(method=RequestMethod.GET, value="/login")
     public ResponseEntity<String> actionRequest(@RequestParam(value="fieldName", defaultValue="field") String fieldNameParameter) {
         logger.info(fieldNameParameter);
-        return ResponseEntity.status(HttpStatus.OK).body(userName);
+        return ResponseEntity.status(HttpStatus.OK).body(fieldNameParameter);
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/login")

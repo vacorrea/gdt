@@ -1,0 +1,15 @@
+---
+- name: config
+  hosts: lnx.me.in
+  become: yes
+  become_user: root
+  become_method: su
+
+  tasks:
+    - name: echo config
+      shell: echo "hello config"
+
+- name: install postgresql server
+  import_playbook: postgresql.yaml
+- name: install redis server
+  import_playbook: redis.yaml
