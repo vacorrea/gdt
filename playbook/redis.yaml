@@ -27,6 +27,8 @@
       get_url:
           url: http://download.redis.io/redis-stable.tar.gz  
           dest: /usr/srv/redis/redis-stable.tar.gz
+          owner: redis
+          group: redis
           checksum: sha256:8e70df1747e9d452432bbb26fa48c7489237fb33df34054cddf0022206ab79cd        
     - name: download redis conf
       get_url:
@@ -40,9 +42,9 @@
         group: redis
     - name: download systemd script
       get_url: 
-          url: https://gist.githubusercontent.com/vacorrea/c5794562080a25125b9bdf621aad6ac3/raw/9fab5d699dcbd067dc64cd4637e8b658c35ea131/redis.service
+          url: https://gist.githubusercontent.com/vacorrea/c5794562080a25125b9bdf621aad6ac3/raw/3b39149d6e37ba5175bce8773dc3c783b5c3cad2/redis.service
           dest: /etc/systemd/system/redis.service
-          checksum: sha256:daef5019b8c4e90282f293fce99aaafe75257773b4ed7e0a9f7bdb913c6e63f7                    
+          checksum: sha256:daef5019b8c4e90282f293fce99aaafe75257773b4ed7e0a9f7bdb913c6e63f7
     - name: daemons reload
       shell: systemctl daemon-reload
 

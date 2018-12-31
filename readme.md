@@ -10,6 +10,9 @@ keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 -keys
 keytool -list -v
 keytool -list -v -storetype pkcs12 -keystore keystore.p12
 
+# required libs do compile
+dnf group install @c-development
+yum groupinstall "Development Tools"
 
 # ansible playbooks
  $ ansible-playbook -i /etc/ansible/hosts  /home/vcorrea/Desktop/area51/app/gdt/playbook/redis.yaml  --ask-become-pass
