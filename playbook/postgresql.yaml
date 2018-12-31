@@ -1,0 +1,10 @@
+---
+- name: postgresql
+  hosts: lnx.me.in
+  become: yes
+  become_user: root
+  become_method: su
+
+  tasks:
+    - name: echo postgresql
+      shell: echo "hello world postgresql"
