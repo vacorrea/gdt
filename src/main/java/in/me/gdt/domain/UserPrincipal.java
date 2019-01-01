@@ -21,6 +21,8 @@ public class UserPrincipal implements Serializable {
     
     private String userPasswdHash;
     
+    private UserPrincipalRole role;
+
     public Long getId() {
         return id;
     }    
@@ -33,17 +35,15 @@ public class UserPrincipal implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    /**
-     * @return the userPasswdHash. This passwd hash will come from redis dynamically as requirement
-     * try to use aspect
-     */
-    public String getUserPasswdHash() {
-        //TODO get from redis
-        return userPasswdHash;
+    public void setRole(UserPrincipalRole role) {
+        this.role = role;
     }
-    /**
-     * @param userPasswdHash the userPasswdHash to set. Set on redis
-     */
+    public UserPrincipalRole getRole() {
+        return role;
+    }
+    public String getUserPasswdHash() {        
+        return userPasswdHash;
+    }    
     public void setUserPasswdHash(String userPasswdHash) {
         this.userPasswdHash = userPasswdHash;
     }

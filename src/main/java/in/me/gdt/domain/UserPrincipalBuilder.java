@@ -18,4 +18,8 @@ public class UserPrincipalBuilder {
         this.userPrincipal.setUserPasswdHash(userPasswdHash);
         return this;
     }
+    public UserPrincipalBuilder userRole(UserPrincipalRole role) {
+        this.userPrincipal.setRole(role);
+        return this;
+    }
 }
