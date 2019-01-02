@@ -1,5 +1,6 @@
 package in.me.gdt;
 
+import java.util.Date;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import in.me.gdt.domain.ActionService;
 import in.me.gdt.domain.Post;
 import in.me.gdt.domain.UserPrincipal;
@@ -30,6 +30,13 @@ public class RestService {
     public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {       
         logger.info(postid.toString());        
         Post post = actionService.getPostById(postid);
+        return ResponseEntity.status(HttpStatus.OK).body(post.toString());
+    }
+    @RequestMapping(method=RequestMethod.GET, value="/action/search")
+    public ResponseEntity<String> SearchRequest(@RequestParam(value="id", defaultValue="1", required=true) Long postId,
+         @RequestParam(value="userMention", required=false) String userMentioned, @RequestParam(value="date") Date date) {       
+        logger.info(postId.toString());
+        Post post = actionService.getPostById(postId);
         return ResponseEntity.status(HttpStatus.OK).body(post.toString());
     }
 

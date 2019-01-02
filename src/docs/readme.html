@@ -442,6 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_cloning_gdt_repo">cloning gdt repo</a></li>
 <li><a href="#_execute_playbooks">execute playbooks</a></li>
 <li><a href="#_next_steps">next steps</a></li>
+<li><a href="#_logs_misc">logs misc</a></li>
 </ul>
 </div>
 </div>
@@ -450,6 +451,48 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>gdt is a springboot app - tomcat embedded -  &#8230;&#8203; <a href="http://asciidoc.org">AsciiDoc</a>.</p>
+</div>
+<div class="paragraph">
+<p>Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fedora Server 27 virtual ( testei no libvirt )</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4 gigas de ram</p>
+</li>
+<li>
+<p>2 vcpus</p>
+</li>
+<li>
+<p>18 gigas de disco</p>
+</li>
+<li>
+<p>4 gigas na particao /var</p>
+</li>
+<li>
+<p>4 gigas na particao /usr</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>git client instalado</p>
+</li>
+<li>
+<p>ansible instalado</p>
+<div class="ulist">
+<ul>
+<li>
+<p># ssh-keygen -t rsa</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -511,11 +554,74 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_logs_misc">logs misc</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>documentation:</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>execute tests with apache benchmark
+# ab  -t 60 -n 10000 https:domain:8443</p>
+<div class="literalblock">
+<div class="content">
+<pre># create auto signed cert
+keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -storepass passwd -keypass passwd -dname 'CN=globo' -validity 3650
+# list
+keytool -list -v
+keytool -list -v -storetype pkcs12 -keystore keystore.p12</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># required libs do compile
+dnf group install @c-development
+yum groupinstall "Development Tools"</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># ansible playbooks
+ $ ansible-playbook -i /etc/ansible/hosts  /home/vcorrea/Desktop/area51/app/gdt/playbook/redis.yaml  --ask-become-pass</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># redis benchmark
+https://gist.github.com/JonCole/925630df72be1351b21440625ff2671f</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># redis  important info - https://redis.io/topics/data-types-intro
+Set daemonize to yes (by default it is set to no).
+Set the pidfile to /var/run/redis_6379.pid (modify the port if needed).
+Change the port accordingly. In our example it is not needed as the default port is already 6379.
+Set your preferred loglevel.
+Set the logfile to /var/log/redis_6379.log
+Set the dir to /var/redis/6379 (very important step!)
+Finally add the new Redis init script to all the default runlevels using the following command:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>sudo update-rc.d redis_6379 defaults</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2018-12-31 11:54:27 -02
+Last updated 2019-01-02 19:07:03 -02
 </div>
 </div>
 </body>
