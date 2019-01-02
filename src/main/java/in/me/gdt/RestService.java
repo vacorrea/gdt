@@ -35,7 +35,7 @@ public class RestService {
         logger.info(postid.toString());
         if(optPost.isPresent())  
            post = optPost.get();        
-        //post.setComments(commentService.findByPostId(post.getId()));          
+        post.setComments(commentService.findByPostId(post.getId()));          
         return ResponseEntity.status(HttpStatus.OK).body(postid.toString());
     }
 
