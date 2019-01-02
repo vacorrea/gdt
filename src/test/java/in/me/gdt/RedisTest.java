@@ -1,3 +1,4 @@
+
 package in.me.gdt;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import redis.embedded.RedisServer;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserCredentialRedisTest {
+public class RedisTest {
     @Autowired private UserCredentialService userCredentialService;
     
     private RedisServer redisServer;

@@ -17,10 +17,10 @@ import in.me.gdt.domain.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationTests {
+public class ApplicationTest {
 	
 	@Autowired private UserService userService;
-	private Logger logger = Logger.getLogger(ApplicationTests.class.getName());
+	private Logger logger = Logger.getLogger(ApplicationTest.class.getName());
     
     @Test public void databaseTest() {
         logger.info("databaseTest \n\n");

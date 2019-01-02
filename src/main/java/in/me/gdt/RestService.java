@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserService;
 
+
 @RestController
 @RequestMapping(value="/")
 public class RestService {
