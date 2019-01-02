@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
@@ -20,6 +22,7 @@ public class Post implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "postSequence")
     private Long id;
     
+    @Lob @Column(name="content", length=1024)
     private String content;
 
     @Transient private Map<Long, Comment> comments = new HashMap<Long, Comment>();
@@ -29,6 +32,9 @@ public class Post implements Serializable {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public void setComments(Map<Long, Comment> comments) {
+        this.comments = comments;
     }
     public Map<Long, Comment> getComments() {
         return comments;
