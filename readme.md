@@ -17,6 +17,8 @@ yum groupinstall "Development Tools"
 # ansible playbooks
  $ ansible-playbook -i /etc/ansible/hosts  /home/vcorrea/Desktop/area51/app/gdt/playbook/redis.yaml  --ask-become-pass
 
+# redis benchmark 
+https://gist.github.com/JonCole/925630df72be1351b21440625ff2671f
 
 # redis  important info - https://redis.io/topics/data-types-intro
 Set daemonize to yes (by default it is set to no).

@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import in.me.gdt.domain.CommentService;
+import in.me.gdt.domain.ActionService;
 import in.me.gdt.domain.Post;
-import in.me.gdt.domain.PostService;
 import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserService;
 
@@ -23,20 +22,15 @@ import in.me.gdt.domain.UserService;
 public class RestService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
     @Autowired private UserService userService;    
-    @Autowired private PostService postService;
-    @Autowired private CommentService commentService;
+    @Autowired private ActionService actionService;    
 
     // TODO BCryptPasswordEncoder passwordEncoder; 
     
     @RequestMapping(method=RequestMethod.GET, value="/action")
-    public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {
-        Optional<Post> optPost = postService.findById(postid); 
-        Post post = null;
-        logger.info(postid.toString());
-        if(optPost.isPresent())  
-           post = optPost.get();        
-        post.setComments(commentService.findByPostId(post.getId()));          
-        return ResponseEntity.status(HttpStatus.OK).body(postid.toString());
+    public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {       
+        logger.info(postid.toString());        
+        Post post = actionService.getPostById(postid);
+        return ResponseEntity.status(HttpStatus.OK).body(post.toString());
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/login")
