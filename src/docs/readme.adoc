@@ -15,7 +15,7 @@ req: has to serve 10k request on https port
 	
 $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
-		* ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
+===  * ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
 
 
 
@@ -52,7 +52,15 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 				# echo "gdt.me.in ansible_connection=local ansible_python_interpreter=/usr/bin/python"  >  /etc/ansible/hosts
 
-		5. clone o projeto do github
+		5. Download da jdk versao 8
+
+				A jdk oracle ou openjdk deve estar em um arquivo chamado /home/jdk.tar.gz  
+
+					- Aqui faco uma pequena observacao sobre esta alternativa. O download da jdk pela oracle requer accept agreement.
+					A openjdk 8 
+					Poderia usar o rpm, mas devido a instalacao de java sempre requerer coisas especificas prefiro fazer manualmente.
+
+		6.. clone o projeto do github
 				
 				# cd /home
 				# git clone https://github.com/vacorrea/gdt.git 
@@ -64,9 +72,9 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 == Playbook de preparacao do ambiente
 	
 	Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
-	Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
-	de criacao de diretorios e permissoes precisam deste.  
-	Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.
+	Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. 
+	Alguns comandos de criacao de diretorios e permissoes precisam deste. Este playbook deve configurar as db's 
+	sql, nosql juntamente com seus servicos além de configuracoes de kernel.
 
 			
 
@@ -74,7 +82,9 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 		
 			# ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass
 
-			
+			-- também é necessário alterar a permissão do diretorio gdt:
+
+			# chown -R java.  gdt
 
 
 === * ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login
@@ -84,8 +94,12 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 == Build do app springboot
 	
-	Para realizar o build do app 
+	Para realizar o build do app utilize o usuario de operacao 'java'
 
+	# cd /home/gdt
+	# mvn clean package
+
+=== o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/
 
 == logs misc
 

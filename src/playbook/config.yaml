@@ -28,18 +28,13 @@
           owner: java
           group: java
           state: directory
-    - name: download jdk
-      get_url: 
-          url: https://download.java.net/openjdk/jdk9/ri/openjdk-9+181_linux-x64_ri.zip
-          dest: /usr/java/openjdk-9+181_linux-x64_ri.zip
-          owner: java
-          group: java
+
     - name: unzip jdk
       unarchive: 
-          src: /usr/java/openjdk-9+181_linux-x64_ri.zip
+          src: /home/jdk.tar.gz
           dest: /usr/java/
     - name: change jdk dir
-      shell: cp -rf /usr/java/java-se-9-ri/jdk-9/*   /usr/java/jdk/
+      shell: cp -rf /usr/java/jdk1*/   /usr/java/jdk/
 
     - name: create /usr/java/maven dir
       file: 
@@ -61,7 +56,7 @@
     - name: change dir
       shell: cp -rf /usr/java/apache-maven-3.6.0/*   /usr/java/maven/
 
-    - name: profile vars
+    - name: copy env vars 
       copy:         
           src: content/environment
           dest: /etc/environment

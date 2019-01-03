@@ -71,6 +71,8 @@
     - name: change dir to make test
       command: chdir=/usr/srv/redis/redis-stable make test
     
+    - name: enable redis
+      shell: systemctl enable redis
     - name: start redis service
       systemd:
           state: started

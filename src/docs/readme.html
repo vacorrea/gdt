@@ -437,7 +437,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
+<ul class="sectlevel2">
+<li><a href="#_atencao_esse_guia_considera_que_esteja_disponibilizado_um_host_com_as_seguintes_caracteristicas">* ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</a></li>
 <li><a href="#_pre_reqs">pre reqs</a></li>
 <li><a href="#_playbook_de_preparacao_do_ambiente">Playbook de preparacao do ambiente</a>
 <ul class="sectlevel2">
@@ -445,7 +446,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_atencao_devido_a_pb_settar_variaveis_de_ambiente_é_necessário_executar_o_comando_source_ou_logout_login">* ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login</a></li>
 </ul>
 </li>
-<li><a href="#_build_do_app_springboot">Build do app springboot</a></li>
+<li><a href="#_build_do_app_springboot">Build do app springboot</a>
+<ul class="sectlevel2">
+<li><a href="#_o_build_ira_baixar_as_dependencias_necessarias_realizar_todos_os_testes_do_app_e_gerar_um_artefato_em_target">o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/</a></li>
+</ul>
+</li>
 <li><a href="#_logs_misc">logs misc</a></li>
 </ul>
 </div>
@@ -461,14 +466,11 @@ req: has to serve 10k request on https port</p>
 <div class="paragraph">
 <p>$ ab  -t 60 -n 10000 https:gdt:8443/api/</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</p>
-</li>
-</ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_atencao_esse_guia_considera_que_esteja_disponibilizado_um_host_com_as_seguintes_caracteristicas">* ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</h3>
+
 </div>
 <div class="sect1">
 <h2 id="_pre_reqs">pre reqs</h2>
@@ -594,8 +596,18 @@ Este playbook deve configurar as db's sql, nosql juntamente com seus servicos al
 <div class="sectionbody">
 <div class="literalblock">
 <div class="content">
-<pre>Para realizar o build do app</pre>
+<pre>Para realizar o build do app utilize o usuario de operacao 'java'</pre>
 </div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># cd /home/gdt
+# mvn clean package</pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_o_build_ira_baixar_as_dependencias_necessarias_realizar_todos_os_testes_do_app_e_gerar_um_artefato_em_target">o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/</h3>
+
 </div>
 </div>
 </div>
@@ -666,7 +678,7 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-03 12:47:13 -02
+Last updated 2019-01-03 12:56:18 -02
 </div>
 </div>
 </body>

@@ -17,3 +17,5 @@
       dnf:
         name: postgresql-server
         state: latest
+    - name: enable postgres
+      shell: systemctl enable postgresql
