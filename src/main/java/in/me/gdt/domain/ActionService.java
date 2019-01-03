@@ -1,5 +1,6 @@
 package in.me.gdt.domain;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -21,6 +22,10 @@ public class ActionService {
         post = optPost.get();        
         post.setComments(commentService.findByPostId(post.getId()));          
         return post;
+    }
+    public List<Post> getAllPosts() {
+        List<Post> posts = postService.findAll();
+        return posts;
     }
     public void insertPost(Post post) {
         postService.save(post);
