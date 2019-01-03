@@ -68,7 +68,7 @@
         
     - name: install @cdev packages
       dnf:
-        name: @c-development
+        name: '@c-development'
         state: latest
     - name: change dir to make
       command: chdir=/usr/srv/redis/redis-stable make

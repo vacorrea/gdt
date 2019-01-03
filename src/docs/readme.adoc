@@ -10,50 +10,72 @@ v1.0, 2018-31-12
 :stylesheet: 
 
 gdt is a springboot app - tomcat embedded -  ... http://asciidoc.org[AsciiDoc].
+postgresl sql database and redis nosql
+req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:8443/api/
 
-Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
+* Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
 
-1. Fedora Server 27 virtual ( testei no libvirt )
-      - 4 gigas de ram
-      - 2 vcpus
-      - 18 gigas de disco 
-      - 4 gigas na particao /var 
-      - 4 gigas na particao /usr
 
-2. Crie a chave ssh  # ssh-keygen -t rsa 
-2.1. Desabilitaremos o selinux e o firewall
-		# setenforce 0
-		# edite /etc/selinux/conf  -> disabled
-		
-		# systemctl stop firewalld
-		# systemctl disable firewalld
-		# iptables -F
-
-3. git client instalado
-	- # dnf install git  git-core -y
-4. ansible instalado 
-    - # dnf install ansible libselinux-python unzip tar -y 
-4.1. inclua em /etc/ansible/hosts  o host que sera utilizado  
 
 == pre reqs
 
-* required steps
-* server required
-* maven 
+		1. Fedora Server 27 virtual ( testei no libvirt )
+		      - 4 gigas de ram
+		      - 2 vcpus
+		      - 18 gigas de disco 
+		      - 4 gigas na particao /var 
+		      - 4 gigas na particao /usr
 
-[source,ruby]
-puts "Hello, World!"
+		2. Crie a chave ssh  
+
+				# ssh-keygen -t rsa 
+
+		2.1. Desabilitaremos o selinux e o firewall
+				
+				# setenforce 0
+				# edite /etc/selinux/conf  -> disabled
+				
+				# systemctl stop firewalld
+				# systemctl disable firewalld
+				# iptables -F
+
+		3. Os seguintes pacotes devem estar instalados para o funcionamento do playbook ansible e git:
+				
+				# dnf install git  git-core -y
+			    # dnf install ansible libselinux-python unzip tar -y 
+
+		4. inclua em /etc/ansible/hosts  o host que sera utilizado 
+
+				# echo "gdt.me.in"  >  /etc/ansible/hosts
+
+		5. clone o projeto do github
+				
+				# git clone https://github.com/vacorrea/gdt.git 
+				# cd gdt
+
+		    
+		Os próximos passos de provisionamento estão automatizados
+
+== Playbook de preparacao do ambiente
+	
+	- Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
+	Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
+	de criacao de diretorios e permissoes precisam deste.  
+
+			
+
+=== Executando playbook
+		
+			# ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass
+
+			
 
 
-== cloning gdt repo
-
-* clone github gdt 
-*
 
 
-== execute playbooks 
-- run the playbook x 
-=== after run pb llllllll
+=== * ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login
+				
+				# source /etc/profile
 
 
 == next steps

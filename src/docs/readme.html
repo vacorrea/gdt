@@ -439,8 +439,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_pre_reqs">pre reqs</a></li>
-<li><a href="#_cloning_gdt_repo">cloning gdt repo</a></li>
-<li><a href="#_execute_playbooks">execute playbooks</a></li>
+<li><a href="#_playbook_de_preparacao_do_ambiente">Playbook de preparacao do ambiente</a>
+<ul class="sectlevel2">
+<li><a href="#_executando_playbook">Executando playbook</a></li>
+<li><a href="#_atencao_devido_a_pb_settar_variaveis_de_ambiente_é_necessário_executar_o_comando_source_ou_logout_login">* ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login</a></li>
+</ul>
+</li>
 <li><a href="#_next_steps">next steps</a></li>
 <li><a href="#_logs_misc">logs misc</a></li>
 </ul>
@@ -450,11 +454,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>gdt is a springboot app - tomcat embedded -  &#8230;&#8203; <a href="http://asciidoc.org">AsciiDoc</a>.</p>
+<p>gdt is a springboot app - tomcat embedded -  &#8230;&#8203; <a href="http://asciidoc.org">AsciiDoc</a>.
+postgresl sql database and redis nosql
+req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:8443/api/</p>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</p>
+</li>
+</ul>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_pre_reqs">pre reqs</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -480,16 +495,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>git client instalado</p>
+<p>Crie a chave ssh</p>
+<div class="literalblock">
+<div class="content">
+<pre># ssh-keygen -t rsa</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>2.1. Desabilitaremos o selinux e o firewall</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># setenforce 0
+# edite /etc/selinux/conf  -&gt; disabled</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># systemctl stop firewalld
+# systemctl disable firewalld
+# iptables -F</pre>
+</div>
+</div>
 </li>
 <li>
-<p>ansible instalado</p>
-<div class="ulist">
-<ul>
-<li>
-<p># ssh-keygen -t rsa</p>
+<p>Os seguintes pacotes devem estar instalados para o funcionamento do playbook ansible e git:</p>
+<div class="literalblock">
+<div class="content">
+<pre># dnf install git  git-core -y
+   # dnf install ansible libselinux-python unzip tar -y</pre>
+</div>
+</div>
 </li>
-</ul>
+<li>
+<p>inclua em /etc/ansible/hosts  o host que sera utilizado</p>
+<div class="literalblock">
+<div class="content">
+<pre># echo "gdt.me.in"  &gt;  /etc/ansible/hosts</pre>
+</div>
+</div>
+</li>
+<li>
+<p>clone o projeto do github</p>
+<div class="literalblock">
+<div class="content">
+<pre># git clone https://github.com/vacorrea/gdt.git
+# cd gdt</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Os próximos passos de provisionamento estão automatizados</pre>
+</div>
 </div>
 </li>
 </ol>
@@ -497,51 +556,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_pre_reqs">pre reqs</h2>
+<h2 id="_playbook_de_preparacao_do_ambiente">Playbook de preparacao do ambiente</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>required steps</p>
-</li>
-<li>
-<p>server required</p>
-</li>
-<li>
-<p>maven</p>
+<p>Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
+Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
+de criacao de diretorios e permissoes precisam deste.</p>
 </li>
 </ul>
 </div>
-<div class="listingblock">
+<div class="sect2">
+<h3 id="_executando_playbook">Executando playbook</h3>
+<div class="literalblock">
 <div class="content">
-<pre class="highlight"><code class="language-ruby" data-lang="ruby">puts "Hello, World!"</code></pre>
+<pre># ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass</pre>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_cloning_gdt_repo">cloning gdt repo</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>clone github gdt
-*</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="_atencao_devido_a_pb_settar_variaveis_de_ambiente_é_necessário_executar_o_comando_source_ou_logout_login">* ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login</h3>
+<div class="literalblock">
+<div class="content">
+<pre># source /etc/profile</pre>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_execute_playbooks">execute playbooks</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>run the playbook x
-=== after run pb llllllll</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -621,7 +661,7 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-02 19:07:03 -02
+Last updated 2019-01-03 12:18:19 -02
 </div>
 </div>
 </body>
