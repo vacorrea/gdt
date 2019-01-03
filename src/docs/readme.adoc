@@ -32,7 +32,7 @@ Esse guia considera que esteja disponibilizado um host com as seguintes caracter
 3. git client instalado
 	- # dnf install git  git-core -y
 4. ansible instalado 
-    - # dnf install ansible libselinux-python -y 
+    - # dnf install ansible libselinux-python unzip tar -y 
 4.1. inclua em /etc/ansible/hosts  o host que sera utilizado  
 
 == pre reqs

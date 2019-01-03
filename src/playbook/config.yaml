@@ -18,14 +18,16 @@
         name: java           
         password: $6$t9pW/4G7eIQUh07F$SbNcmy96/5NfpLbMZYLSzLFwlHxzlvdTapsTxsXvRmA40Ab8AKJqv6Q2skiwTJihal6c7uqTkpncynhGFFYQH1
         create_home: no
+        home: /usr/java
+        groups: wheel 
         state: present
-    - name: create /usr/java dir
+
+    - name: create /usr/java/jdk dir
       file: 
-          path: /usr/java
+          path: /usr/java/jdk
           owner: java
           group: java
           state: directory
-
     - name: download jdk
       get_url: 
           url: https://download.java.net/openjdk/jdk9/ri/openjdk-9+181_linux-x64_ri.zip
@@ -35,19 +37,29 @@
     - name: unzip jdk
       unarchive: 
           src: /usr/java/openjdk-9+181_linux-x64_ri.zip
-          dest: /usr/java/jdk
+          dest: /usr/java/
+    - name: change jdk dir
+      shell: mv /usr/java/java-se-9-ri/jdk-9/   /usr/java/jdk
 
+    - name: create /usr/java/maven dir
+      file: 
+          path: /usr/java/maven
+          owner: java
+          group: java
+          state: directory
     - name: download maven
       get_url: 
           url: https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
           dest: /usr/java/
           owner: java
           group: java
-
+          checksum: sha256:6a1b346af36a1f1a491c1c1a141667c5de69b42e6611d3687df26868bc0f4637
     - name: untar maven
       unarchive: 
           src: /usr/java/apache-maven-3.6.0-bin.tar.gz
-          dest: /usr/java/maven
+          dest: /usr/java
+    - name: change dir
+      shell: mv /usr/java/apache-maven-3.6.0/   /usr/java/maven
 
     - name: profile vars
       shell: tee /etc/environment << EOF
