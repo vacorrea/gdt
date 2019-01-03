@@ -30,10 +30,16 @@
           name: postgresql 
     
     - name: create gdt db
-      
+      become: yes
+      become_user: postgres
+      become_method: su
+      shell: createdb gdt
 
-    - postgresql_user:
-        db: gdt
-        name: postgres
+    - postgresql_db:
+        name: gdt        
+        name: postgres        
         password: postgres
-        priv: "CONNECT/gdt:ALL"        
+        priv: "CONNECT/gdt:ALL"                
+        state: present
+    
+    
