@@ -1,0 +1,3 @@
+JAVA_HOME=/usr/java/jdk
+M2_HOME=/usr/java/maven
+PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:$JAVA_HOME/bin:$M2_HOME/bin:$HOME/bin
