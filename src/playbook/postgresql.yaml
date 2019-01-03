@@ -28,13 +28,7 @@
       systemd:
           state: started
           name: postgresql 
-    
-    - name: create gdt user
-      become: yes
-      become_user: postgres
-      become_method: su
-      shell: psql -U postgres -c "CREATE USER postgres WITH ENCRYPTED PASSWORD 'postgres'";
-
+          
     - name: create gdt db
       become: yes
       become_user: postgres
