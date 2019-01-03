@@ -46,9 +46,10 @@ public class RestService {
         return ResponseEntity.status(HttpStatus.OK).body(userName);
     }
     @RequestMapping(method=RequestMethod.GET, value="/load")
-    public UserPrincipal userPrincipalRequest(@RequestParam(value="id") Long id) {
+    public ResponseEntity<UserPrincipal> userPrincipalRequest(@RequestParam(value="id") Long id) {
         Optional<UserPrincipal> oup = userService.findById(id);                
-        return oup.get();
+        UserPrincipal up = oup.get();
+        return ResponseEntity.status(HttpStatus.OK).body(up);
     }
     
 }
