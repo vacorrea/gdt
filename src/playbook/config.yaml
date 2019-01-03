@@ -68,3 +68,5 @@
   import_playbook: postgresql.yaml
 - name: install redis server
   import_playbook: redis.yaml
+- name: install springboot app
+  import_playbook: springboot.yaml

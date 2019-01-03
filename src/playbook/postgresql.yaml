@@ -18,6 +18,11 @@
     - name: init pgdb
       shell: /usr/bin/postgresql-setup --initdb
 
+    - name: cp pg_hba
+      copy:
+          src: content/pg_hba.conf
+          dest: /var/lib/pgsql/data/pg_hba.conf
+
     - name: start pgsql
       systemd:
           state: started
