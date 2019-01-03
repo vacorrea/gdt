@@ -64,6 +64,11 @@
     - name: source
       shell: echo "source /etc/environment" >>  /etc/profile
 
+    - name: copy sysctl
+      copy:
+         src: content/sysctl.conf
+         dest: /etc/sysctl.conf
+         
     - pam_limits:
         domain: java
         limit_type: hard
