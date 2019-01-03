@@ -82,9 +82,11 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 === Executando playbook
 		
+		Toda a configuracao do ambiente e feita através de um unico playbook, o config.yaml. O redis é compilado
+		e testado durante essa execucao. Tempo de para beber agua enquanto executa
 			# ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass
 
-			-- também é necessário alterar a permissão do diretorio gdt:
+			-- é necessário alterar a permissão do diretorio gdt após a execucao:
 
 			# chown -R java.  gdt
 
