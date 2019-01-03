@@ -121,20 +121,25 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 == Execute o teste 
 	
-	Vale ressaltar que estamos usando certificados. É necessario baixar o cert:
-	# openssl s_client -connect gdt:8443 <<<'' | openssl pkcs12 -out gdt.pem
-    
+	Vale ressaltar que estamos usando certificados. Os testes devem ser executados de um outro host, logo é
+	necessario baixar o cert:
 
-	wget  https://gdt:8443/api  --certificate=/etc/pki/ca-trust/source/anchors/gdt.pem   --user=admin --password=admin
-	https://gdt:8443/api/load?id=1
+	# openssl s_client -connect gdt:8443 <<<'' | openssl pkcs12 -out gdt.pem
+	example:
+	# openssl s_client -connect gdt:8443 </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > gdt.pem
+    
+    Usaremos o cacerts
+	# mv gdt.pem   /etc/pki/ca-trust/source/anchors/
+	# update-ca-trust enable; update-ca-trust extract
+	wget  https://gdt:8443/api/load?id=1 --certificate=/etc/pki/ca-trust/source/anchors/gdt.pem   --user=admin --password=admin
+	
 
 
 == logs misc aka mynotes
 
 		documentation:
 		
-		--		import self signed cert
-		# sudo openssl s_client -connect gdt:8443 <<<'' | openssl pkcs12 -out gdt.pem
+		
 		# update-ca-trust enable; update-ca-trust extract
 		1. execute tests with apache benchmark
 		# ab  -t 60 -n 10000 https:domain:8443     
