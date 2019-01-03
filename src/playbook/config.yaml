@@ -64,6 +64,43 @@
     - name: source
       shell: echo "source /etc/environment" >>  /etc/profile
 
+    - pam_limits:
+        domain: java
+        limit_type: hard
+        limit_item: nofile
+        value: 10240
+        use_max: true        
+    - pam_limits:
+        domain: postgres
+        limit_type: hard
+        limit_item: nofile
+        value: 10240
+        use_max: true
+    - pam_limits:
+        domain: redis
+        limit_type: hard
+        limit_item: nofile
+        value: 10240
+        use_max: true
+    - pam_limits:
+        domain: java
+        limit_type: hard
+        limit_item: nproc
+        value: 256662
+        use_max: true
+    - pam_limits:
+        domain: postgres
+        limit_type: hard
+        limit_item: nproc
+        value: 256662
+        use_max: true
+    - pam_limits:
+        domain: redis
+        limit_type: hard
+        limit_item: nproc
+        value: 256662
+        use_max: true
+
 - name: install postgresql server
   import_playbook: postgresql.yaml
 - name: install redis server
