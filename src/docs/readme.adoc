@@ -99,9 +99,11 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 	# cd /home/gdt
 	# mvn clean package
 
+	-- the internet will be downloaded ... take a coffee ... 
+
 === o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/
 
-== logs misc
+== logs misc aka mynotes
 
 		documentation:
 

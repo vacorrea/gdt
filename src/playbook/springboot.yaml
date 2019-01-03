@@ -1,0 +1,18 @@
+---
+- name: springboot
+  hosts: gdt.me.in
+  become: yes
+  become_user: root
+  become_method: su
+
+  tasks:
+    - name: echo 
+      shell: echo "hello springboot"    
+        
+    - name: copy env vars 
+      copy:         
+          src: content/environment
+          dest: /etc/environment
+    
+  
+

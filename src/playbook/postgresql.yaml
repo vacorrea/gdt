@@ -9,13 +9,11 @@
     - name: echo postgresql
       shell: echo "hello world postgresql"
       
-    - name: upgrade packages
-      dnf:
-        name: "*"
-        state: latest    
     - name: install postgresql server
       dnf:
         name: postgresql-server
         state: latest
     - name: enable postgres
       shell: systemctl enable postgresql
+    - name: init pgdb
+      shell: /usr/bin/postgresql-setup --initdb
