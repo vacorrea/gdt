@@ -26,4 +26,14 @@
     - name: start pgsql
       systemd:
           state: started
-          name: postgresql
+          name: postgresql 
+
+    - postgresql_db:
+        login_host: localhost        
+        name: gdt
+
+    - postgresql_user:
+        db: gdt
+        name: postgres
+        password: postgres
+        priv: "CONNECT/products:ALL"        
