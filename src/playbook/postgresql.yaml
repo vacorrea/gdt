@@ -22,18 +22,18 @@
       copy:
           src: content/pg_hba.conf
           dest: /var/lib/pgsql/data/pg_hba.conf
-
+    - name: passwd postgres
+      shell: echo "postgres" | passwd --stdin postgres
     - name: start pgsql
       systemd:
           state: started
           name: postgresql 
-
-    - postgresql_db:
-        login_host: localhost        
-        name: gdt
+    
+    - name: create gdt db
+      
 
     - postgresql_user:
         db: gdt
         name: postgres
         password: postgres
-        priv: "CONNECT/products:ALL"        
+        priv: "CONNECT/gdt:ALL"        

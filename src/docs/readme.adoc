@@ -47,6 +47,7 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 				# dnf install git  git-core -y
 			    # dnf install ansible libselinux-python unzip tar -y 
 			    # dnf install tcl
+			    # dnf install python2-psycopg2.x86_64
 
 		4. inclua em /etc/ansible/hosts  o host que sera utilizado 
 
@@ -67,7 +68,8 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 				# cd gdt
 
 		    
-		Os próximos passos de provisionamento estão automatizados
+		Os próximos passos de provisionamento estão automatizados. 
+		- idempotencia - a unica playbook idempotente e a de config devido alguns detalhes
 
 == Playbook de preparacao do ambiente
 	
