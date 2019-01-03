@@ -34,7 +34,7 @@
           src: /home/jdk.tar.gz
           dest: /usr/java/
     - name: change jdk dir
-      shell: cp -rf /usr/java/jdk1*/   /usr/java/jdk/
+      shell: cp -rf /usr/java/jdk1.8*/*   /usr/java/jdk/
 
     - name: create /usr/java/maven dir
       file: 

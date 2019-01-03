@@ -544,7 +544,23 @@ req: has to serve 10k request on https port</p>
 </div>
 </li>
 <li>
-<p>clone o projeto do github</p>
+<p>Download da jdk versao 8</p>
+<div class="literalblock">
+<div class="content">
+<pre>A jdk oracle ou openjdk deve estar em um arquivo chamado /home/jdk.tar.gz</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Aqui faco uma pequena observacao sobre esta alternativa. O download da jdk pela oracle requer accept agreement.
+A openjdk 8
+Poderia usar o rpm, mas devido a instalacao de java sempre requerer coisas especificas prefiro fazer manualmente.</p>
+<div class="literalblock">
+<div class="content">
+<pre>6.. clone o projeto do github</pre>
+</div>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre># cd /home
@@ -558,6 +574,9 @@ req: has to serve 10k request on https port</p>
 </div>
 </div>
 </li>
+</ul>
+</div>
+</li>
 </ol>
 </div>
 </div>
@@ -568,9 +587,9 @@ req: has to serve 10k request on https port</p>
 <div class="literalblock">
 <div class="content">
 <pre>Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
-Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
-de criacao de diretorios e permissoes precisam deste.
-Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
+Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root.
+Alguns comandos de criacao de diretorios e permissoes precisam deste. Este playbook deve configurar as db's
+sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
 </div>
 </div>
 <div class="sect2">
@@ -578,6 +597,16 @@ Este playbook deve configurar as db's sql, nosql juntamente com seus servicos al
 <div class="literalblock">
 <div class="content">
 <pre># ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>-- também é necessário alterar a permissão do diretorio gdt:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># chown -R java.  gdt</pre>
 </div>
 </div>
 </div>
@@ -678,7 +707,7 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-03 12:56:18 -02
+Last updated 2019-01-03 13:45:44 -02
 </div>
 </div>
 </body>
