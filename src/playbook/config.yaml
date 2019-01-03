@@ -67,7 +67,7 @@
           dest: /etc/environment
     
     - name: source
-      shell: source /etc/environment
+      shell: echo "source /etc/environment" >>  /etc/profile
 
 - name: install postgresql server
   import_playbook: postgresql.yaml
