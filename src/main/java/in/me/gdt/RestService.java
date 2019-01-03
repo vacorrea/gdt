@@ -47,9 +47,11 @@ public class RestService {
     }
     @RequestMapping(method=RequestMethod.GET, value="/load")
     public ResponseEntity<UserPrincipal> userPrincipalRequest(@RequestParam(value="id") Long id) {
+        logger.info(id.toString());
         Optional<UserPrincipal> oup = userService.findById(id);              
         UserPrincipal up = oup.get();
-        actionService.getAllPosts();
+        actionService.getPostById(1L);
+        //actionService.getAllPosts();
         return ResponseEntity.status(HttpStatus.OK).body(up);
     }
     

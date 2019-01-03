@@ -135,9 +135,12 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 	# update-ca-trust enable; update-ca-trust extract
 	wget  https://gdt:8443/api/load?id=1 --certificate=/etc/pki/ca-trust/source/anchors/gdt.pem   --user=admin --password=admin
 	
-	para o teste com apache benchmark utilizei o jsession id
+	para o teste com apache benchmark utilizei o jsession id. Para pegar acesse o app e realize o login através
+	do browser e procure o cookie jsessionid
 
 	# ab -t 60 -n 5000 -C JSESSIONID=C210023778ED5D99A191A1551EACB877  https://gdt:8443/api/load?id=201
+
+	
 
 
 == logs misc aka mynotes
