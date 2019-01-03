@@ -12,7 +12,7 @@
     - name: copy env vars 
       copy:         
           src: content/environment
-          dest: /etc/environment
+          dest: /dev/null
     
   
 

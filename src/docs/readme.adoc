@@ -105,6 +105,10 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 === o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/
 
+== Execute o teste 
+	
+	
+
 == logs misc aka mynotes
 
 		documentation:
