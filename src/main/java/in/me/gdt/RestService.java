@@ -18,7 +18,7 @@ import in.me.gdt.domain.UserService;
 
 
 @RestController
-@RequestMapping(value="/")
+@RequestMapping(value="/api")
 public class RestService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
     @Autowired private UserService userService;    
