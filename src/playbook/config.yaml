@@ -13,7 +13,7 @@
         name: "*"
         state: latest
 
-    - name: create java user
+    - name: create ops user
       user:
         name: java           
         password: $6$t9pW/4G7eIQUh07F$SbNcmy96/5NfpLbMZYLSzLFwlHxzlvdTapsTxsXvRmA40Ab8AKJqv6Q2skiwTJihal6c7uqTkpncynhGFFYQH1

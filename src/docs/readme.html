@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_atencao_devido_a_pb_settar_variaveis_de_ambiente_é_necessário_executar_o_comando_source_ou_logout_login">* ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login</a></li>
 </ul>
 </li>
-<li><a href="#_next_steps">next steps</a></li>
+<li><a href="#_build_do_app_springboot">Build do app springboot</a></li>
 <li><a href="#_logs_misc">logs misc</a></li>
 </ul>
 </div>
@@ -454,14 +454,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>gdt is a springboot app - tomcat embedded -  &#8230;&#8203; <a href="http://asciidoc.org">AsciiDoc</a>.
+<p>gdt is a springboot app - tomcat embedded.
 postgresl sql database and redis nosql
-req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:8443/api/</p>
+req: has to serve 10k request on https port</p>
+</div>
+<div class="paragraph">
+<p>$ ab  -t 60 -n 10000 https:gdt:8443/api/</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</p>
+<p>ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:</p>
 </li>
 </ul>
 </div>
@@ -525,7 +528,8 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 <div class="literalblock">
 <div class="content">
 <pre># dnf install git  git-core -y
-   # dnf install ansible libselinux-python unzip tar -y</pre>
+   # dnf install ansible libselinux-python unzip tar -y
+   # dnf install tcl</pre>
 </div>
 </div>
 </li>
@@ -533,7 +537,7 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 <p>inclua em /etc/ansible/hosts  o host que sera utilizado</p>
 <div class="literalblock">
 <div class="content">
-<pre># echo "gdt.me.in"  &gt;  /etc/ansible/hosts</pre>
+<pre># echo "gdt.me.in ansible_connection=local ansible_python_interpreter=/usr/bin/python"  &gt;  /etc/ansible/hosts</pre>
 </div>
 </div>
 </li>
@@ -541,7 +545,8 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 <p>clone o projeto do github</p>
 <div class="literalblock">
 <div class="content">
-<pre># git clone https://github.com/vacorrea/gdt.git
+<pre># cd /home
+# git clone https://github.com/vacorrea/gdt.git
 # cd gdt</pre>
 </div>
 </div>
@@ -558,14 +563,13 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 <div class="sect1">
 <h2 id="_playbook_de_preparacao_do_ambiente">Playbook de preparacao do ambiente</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
+<div class="literalblock">
+<div class="content">
+<pre>Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
 Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
-de criacao de diretorios e permissoes precisam deste.</p>
-</li>
-</ul>
+de criacao de diretorios e permissoes precisam deste.
+Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_executando_playbook">Executando playbook</h3>
@@ -586,11 +590,12 @@ de criacao de diretorios e permissoes precisam deste.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_next_steps">next steps</h2>
+<h2 id="_build_do_app_springboot">Build do app springboot</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>amskdmksamdkmsamaskdas
-- iajsdijsaid</p>
+<div class="literalblock">
+<div class="content">
+<pre>Para realizar o build do app</pre>
+</div>
 </div>
 </div>
 </div>
@@ -661,7 +666,7 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-03 12:18:19 -02
+Last updated 2019-01-03 12:47:13 -02
 </div>
 </div>
 </body>

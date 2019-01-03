@@ -9,17 +9,20 @@ v1.0, 2018-31-12
 :page-keywords: {keywords}
 :stylesheet: 
 
-gdt is a springboot app - tomcat embedded -  ... http://asciidoc.org[AsciiDoc].
+gdt is a springboot app - tomcat embedded.
 postgresl sql database and redis nosql
-req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:8443/api/
+req: has to serve 10k request on https port 
+	
+$ ab  -t 60 -n 10000 https:gdt:8443/api/
 
-* Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
+		* ATENCAO - Esse guia considera que esteja disponibilizado um host com as seguintes caracteristicas:
 
 
 
 == pre reqs
 
 		1. Fedora Server 27 virtual ( testei no libvirt )
+		      
 		      - 4 gigas de ram
 		      - 2 vcpus
 		      - 18 gigas de disco 
@@ -60,10 +63,10 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 
 == Playbook de preparacao do ambiente
 	
-	  Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
+	Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
 	Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
 	de criacao de diretorios e permissoes precisam deste.  
-		Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.
+	Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.
 
 			
 
@@ -81,7 +84,7 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 
 == Build do app springboot
 	
-	
+	Para realizar o build do app 
 
 
 == logs misc
