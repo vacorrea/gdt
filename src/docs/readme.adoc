@@ -21,7 +21,9 @@ Esse guia considera que esteja disponibilizado um host com as seguintes caracter
       - 4 gigas na particao /usr
 
 2. git client instalado
-3. ansible instalado
+	- # dnf install git  git-core -y
+3. ansible instalado 
+    - # dnf install ansible -y
     - # ssh-keygen -t rsa 
 
 
