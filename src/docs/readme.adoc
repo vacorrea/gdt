@@ -43,13 +43,15 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 				
 				# dnf install git  git-core -y
 			    # dnf install ansible libselinux-python unzip tar -y 
+			    # dnf install tcl
 
 		4. inclua em /etc/ansible/hosts  o host que sera utilizado 
 
-				# echo "gdt.me.in"  >  /etc/ansible/hosts
+				# echo "gdt.me.in ansible_connection=local ansible_python_interpreter=/usr/bin/python"  >  /etc/ansible/hosts
 
 		5. clone o projeto do github
 				
+				# cd /home
 				# git clone https://github.com/vacorrea/gdt.git 
 				# cd gdt
 
@@ -58,9 +60,10 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 
 == Playbook de preparacao do ambiente
 	
-	- Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
+	  Para provisionar o ambiente é necessário executar a playbook disponibilizada em src/playbook/config.yaml
 	Nesta configuracao sempre usarremos o comando --ask-become-pass para que seja disponibilizada a senha de root. Alguns comandos
 	de criacao de diretorios e permissoes precisam deste.  
+		Este playbook deve configurar as db's sql, nosql juntamente com seus servicos além de configuracoes de kernel.
 
 			
 
@@ -71,16 +74,14 @@ req: has to serve 10k request on https port # # ab  -t 60 -n 10000 https:gdt:844
 			
 
 
-
-
 === * ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login
 				
 				# source /etc/profile
 
 
-== next steps
-amskdmksamdkmsamaskdas
-- iajsdijsaid
+== Build do app springboot
+	
+	
 
 
 == logs misc
