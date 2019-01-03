@@ -20,12 +20,20 @@ Esse guia considera que esteja disponibilizado um host com as seguintes caracter
       - 4 gigas na particao /var 
       - 4 gigas na particao /usr
 
-2. git client instalado
-	- # dnf install git  git-core -y
-3. ansible instalado 
-    - # dnf install ansible -y
-    - # ssh-keygen -t rsa 
+2. Crie a chave ssh  # ssh-keygen -t rsa 
+2.1. Desabilitaremos o selinux e o firewall
+		# setenforce 0
+		# edite /etc/selinux/conf  -> disabled
+		
+		# systemctl stop firewalld
+		# systemctl disable firewalld
+		# iptables -F
 
+3. git client instalado
+	- # dnf install git  git-core -y
+4. ansible instalado 
+    - # dnf install ansible libselinux-python -y 
+4.1. inclua em /etc/ansible/hosts  o host que sera utilizado  
 
 == pre reqs
 

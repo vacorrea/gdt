@@ -1,6 +1,6 @@
 ---
 - name: postgresql
-  hosts: lnx.me.in
+  hosts: gdt.me.in
   become: yes
   become_user: root
   become_method: su
