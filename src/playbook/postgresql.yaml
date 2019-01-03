@@ -17,3 +17,8 @@
       shell: systemctl enable postgresql
     - name: init pgdb
       shell: /usr/bin/postgresql-setup --initdb
+
+    - name: start pgsql
+      systemd:
+          state: started
+          name: postgresql
