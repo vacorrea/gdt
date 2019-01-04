@@ -119,6 +119,12 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 
 === o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/
 
+== Copiar artefato 
+
+	O script do systemd espera que o artefato esteja no diretorio abaixo e se chame gdt.jar:
+
+	# cp target/gdt-0.0.1-SNAPSHOT.jar  /usr/srv/springboot/gdt.jar    
+	# chmod +x   /usr/srv/springboot/gdt.jar    
 
 
 == Execute o teste 

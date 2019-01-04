@@ -446,13 +446,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_atencao_devido_a_pb_settar_variaveis_de_ambiente_é_necessário_executar_o_comando_source_ou_logout_login">* ATENCAO - devido a pb settar variaveis de ambiente é necessário executar o comando source ou logout/login</a></li>
 </ul>
 </li>
+<li><a href="#_gerar_certificados_tomcat">Gerar certificados tomcat</a></li>
 <li><a href="#_build_do_app_springboot">Build do app springboot</a>
 <ul class="sectlevel2">
 <li><a href="#_o_build_ira_baixar_as_dependencias_necessarias_realizar_todos_os_testes_do_app_e_gerar_um_artefato_em_target">o build ira baixar as dependencias necessarias, realizar todos os testes do app e gerar um artefato em target/</a></li>
 </ul>
 </li>
+<li><a href="#_copiar_artefato">Copiar artefato</a></li>
 <li><a href="#_execute_o_teste">Execute o teste</a></li>
-<li><a href="#_logs_misc_aka_mynotes">logs misc aka mynotes</a></li>
+<li><a href="#_logs_misc_aka_mynotes">logs misc aka mynotes</a>
+<ul class="sectlevel2">
+<li><a href="#_test_results">test results</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -599,12 +605,14 @@ sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
 <h3 id="_executando_playbook">Executando playbook</h3>
 <div class="literalblock">
 <div class="content">
-<pre># ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass</pre>
+<pre>Toda a configuracao do ambiente e feita através de um unico playbook, o config.yaml. O redis é compilado
+e testado durante essa execucao. Tempo de para beber agua enquanto executa
+	# ansible-playbook -i /etc/ansible/playbook    src/playbook/config.yaml  --ask-become-pass</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>-- também é necessário alterar a permissão do diretorio gdt:</pre>
+<pre>-- é necessário alterar a permissão do diretorio gdt após a execucao:</pre>
 </div>
 </div>
 <div class="literalblock">
@@ -619,6 +627,25 @@ sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
 <div class="content">
 <pre># source /etc/profile</pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gerar_certificados_tomcat">Gerar certificados tomcat</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>O app springboot esta preparado para utilizar um keystore.p12 disponibilizado no classpath. Como nao sei o CN e hostname
+é preciso gerar manualmente.
+Para tal altere o CN e execute:
+	# keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 -dname "CN=gdt,OU=dev,O=m,C=BR"   -keystore keystore.p12 -keypass passwd -storepass passwd -validity 4000</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>-- mova o keystore gerado pro classpath
+#  mv keystore.p12 gdt/src/main/resources/keystore/</pre>
 </div>
 </div>
 </div>
@@ -649,9 +676,56 @@ sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="_copiar_artefato">Copiar artefato</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre>O script do systemd espera que o artefato esteja no diretorio abaixo e se chame gdt.jar:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># cp target/gdt-0.0.1-SNAPSHOT.jar  /usr/srv/springboot/gdt.jar
+# chmod +x   /usr/srv/springboot/gdt.jar</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_execute_o_teste">Execute o teste</h2>
 <div class="sectionbody">
-
+<div class="literalblock">
+<div class="content">
+<pre>Vale ressaltar que estamos usando certificados. Os testes devem ser executados de um outro host, logo é
+necessario baixar o cert:</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># openssl s_client -connect gdt:8443 &lt;&lt;&lt;'' | openssl pkcs12 -out gdt.pem
+example:
+# openssl s_client -connect gdt:8443 &lt;/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; gdt.pem</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>   Usaremos o cacerts
+# mv gdt.pem   /etc/pki/ca-trust/source/anchors/
+# update-ca-trust enable; update-ca-trust extract
+wget  https://gdt:8443/api/load?id=1 --certificate=/etc/pki/ca-trust/source/anchors/gdt.pem   --user=admin --password=admin</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>para o teste com apache benchmark utilizei o jsession id. Para pegar acesse o app e realize o login através
+do browser e procure o cookie jsessionid</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># ab -t 60 -n 5000 -C JSESSIONID=C210023778ED5D99A191A1551EACB877  https://gdt:8443/api/load?id=201</pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -662,31 +736,36 @@ sql, nosql juntamente com seus servicos além de configuracoes de kernel.</pre>
 <pre>documentation:</pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>execute tests with apache benchmark
-# ab  -t 60 -n 10000 https:domain:8443</p>
+<div class="literalblock">
+<div class="content">
+<pre># update-ca-trust enable; update-ca-trust extract
+1. execute tests with apache benchmark
+# ab  -t 60 -n 10000 https:domain:8443</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># jstat -gcutil -h20  vmid  1200</pre>
+</div>
+</div>
 <div class="literalblock">
 <div class="content">
 <pre># create auto signed cert
-keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -storepass passwd -keypass passwd -dname 'CN=globo' -validity 3650
-# list
-keytool -list -v
+# keytool -genkeypair -alias gdt -keyalg RSA -keysize 2048 -storetype PKCS12 \
+	-dname "CN=gdt,OU=dev,O=m,C=BR"  \
+	-keystore keystore.p12 -keypass passwd -storepass passwd -validity 4000</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre># list
 keytool -list -v -storetype pkcs12 -keystore keystore.p12</pre>
 </div>
 </div>
 <div class="literalblock">
 <div class="content">
 <pre># required libs do compile
-dnf group install @c-development
-yum groupinstall "Development Tools"</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre># ansible playbooks
- $ ansible-playbook -i /etc/ansible/hosts  /home/vcorrea/Desktop/area51/app/gdt/playbook/redis.yaml  --ask-become-pass</pre>
+dnf group install @c-development</pre>
 </div>
 </div>
 <div class="literalblock">
@@ -712,8 +791,58 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <pre>sudo update-rc.d redis_6379 defaults</pre>
 </div>
 </div>
-</li>
-</ol>
+<div class="sect2">
+<h3 id="_test_results">test results</h3>
+<div class="paragraph">
+<p>Non-default VM flags: -XX:CICompilerCount=2 -XX:InitialHeapSize=16777216 -XX:MaxHeapSize=260046848 -XX:MaxNewSize=86638592 -XX:MinHeapDeltaBytes=196608 -XX:NewSize=5570560 -XX:OldSize=11206656 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops</p>
+</div>
+<div class="paragraph">
+<p>[vcorrea@lnx gdt]$ ab -t 60 -n 10000  <a href="https://gdt:8443/api/load?id=1" class="bare">https://gdt:8443/api/load?id=1</a>
+This is ApacheBench, Version 2.3 &lt;$Revision: 1826891 $&gt;
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, <a href="http://www.zeustech.net/" class="bare">http://www.zeustech.net/</a>
+Licensed to The Apache Software Foundation, <a href="http://www.apache.org/" class="bare">http://www.apache.org/</a></p>
+</div>
+<div class="paragraph">
+<p>Benchmarking gdt (be patient)
+Completed 1000 requests
+Completed 2000 requests
+Completed 3000 requests
+Finished 3907 requests</p>
+</div>
+<div class="paragraph">
+<p>Server Software:
+Server Hostname:        gdt
+Server Port:            8443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+TLS Server Name:        gdt</p>
+</div>
+<div class="paragraph">
+<p>Document Path:          /api/load?id=1
+Document Length:        124 bytes</p>
+</div>
+<div class="paragraph">
+<p>Concurrency Level:      1
+Time taken for tests:   60.003 seconds
+Complete requests:      3907
+Failed requests:        0
+Non-2xx responses:      3907
+Total transferred:      2391084 bytes
+HTML transferred:       484468 bytes
+Requests per second:    65.11 [#/sec] (mean)
+Time per request:       15.358 [ms] (mean)
+Time per request:       15.358 [ms] (mean, across all concurrent requests)
+Transfer rate:          38.92 [Kbytes/sec] received</p>
+</div>
+<div class="paragraph">
+<p>Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       10   14   3.4     14      35
+Processing:     1    2   1.0      1      17
+Waiting:        1    1   0.8      1      17
+Total:         11   15   3.6     16      37
+WARNING: The median and mean for the processing time are not within a normal deviation
+        These results are probably not that reliable.</p>
+</div>
 </div>
 </div>
 </div>
@@ -721,7 +850,7 @@ Finally add the new Redis init script to all the default runlevels using the fol
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-03 17:32:42 -02
+Last updated 2019-01-04 00:16:00 -02
 </div>
 </div>
 </body>
