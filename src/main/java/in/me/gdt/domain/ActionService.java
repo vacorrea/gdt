@@ -18,7 +18,7 @@ public class ActionService {
     @Autowired private PostService postService;
     @Autowired private CommentService commentService;
     @Autowired private UserService userService;
-    @Autowired private RoleService roleRepository;
+    @Autowired private RoleService roleService;
     @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Post getPostById(Long id) throws IllegalArgumentException {
@@ -52,9 +52,12 @@ public class ActionService {
     public User findUserByEmail(String name) {
         return userService.findByUserName(name);
     }
-    public void saveUser(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));         
+    public void save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.getRoles().add(new Role(1L, "ADMIN"));
         userService.save(user);
+    }
+    public User findByUsername(String username) {
+        return userService.findByUserName(username);
     }
 }
