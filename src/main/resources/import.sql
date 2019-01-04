@@ -1,6 +1,11 @@
-insert into user_principal (user_name, user_passwd_hash, id) values ('jax teller', 'jax@yahoo.com', nextval('user_sequence'));
-insert into user_principal (user_name, user_passwd_hash, id) values ('roman polansky', 'rompo@gmail.com', nextval('user_sequence'));
-insert into user_principal (user_name, user_passwd_hash, id) values ('anne hataway', 'anne@live.com', nextval('user_sequence'));
+insert into user (id, username, password) values (nextval('user_sequence'),'jax teller', 'jax@yahoo.com');
+insert into user (id, username, password) values (nextval('user_sequence'),'roman polansky', 'rompo@gmail.com');
+insert into user (id, username, password) values (nextval('user_sequence'), 'anne hataway', 'anne@live.com');
+insert into user (id, username, password) values (nextval('user_sequence'), 'jonny depp', 'jonny@depp.com');
+insert into user (id, username, password) values (nextval('user_sequence'), 'malcom x', 'malconx@live.com');
+
+inser into role (id, name) values (nextval('role_sequence'),'ADMIN');
+inser into role (id, name) values (nextval('role_sequence'),'USER');
 
 insert into post (id, content) values (nextval('post_sequence'), 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
 insert into post (id, content) values (nextval('post_sequence'), 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur');

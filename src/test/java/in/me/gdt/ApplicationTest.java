@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserPrincipalBuilder;
 import in.me.gdt.domain.UserService;
+import in.me.gdt.domain.model.User;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,18 +25,18 @@ public class ApplicationTest {
     
     @Test public void databaseTest() {
         logger.info("databaseTest \n\n");
-        List<UserPrincipal> upList = userService.findAll();
-        for (UserPrincipal var : upList) 
+        List<User> upList = userService.findAll();
+        for (User var : upList) 
             logger.info(var.toString());
     }
     
-	@Test public void whenUserCreationTest() {
+	@Test public void userCreationTest() {
         //userService.save(UserPrincipalBuilder.newInstance().userName("max").userPasswdHash("hxcsao1283").build());
         //UserPrincipal up = userService.findByUserName("max");
         //Assert.assertNotNull(up);
         //Assert.assertEquals("max", up.getUserName());
 		
-		Optional<UserPrincipal> b = userService.findById(1L);
+		Optional<User> b = userService.findById(1L);
 		Assert.assertTrue(b.isPresent());
 		logger.info(b.get().getUserName());
 	}

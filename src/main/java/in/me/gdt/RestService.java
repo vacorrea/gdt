@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import in.me.gdt.domain.ActionService;
 import in.me.gdt.domain.Post;
-import in.me.gdt.domain.UserPrincipal;
 import in.me.gdt.domain.UserService;
+import in.me.gdt.domain.model.User;
 
 
 @RestController
@@ -46,10 +46,10 @@ public class RestService {
         return ResponseEntity.status(HttpStatus.OK).body(userName);
     }
     @RequestMapping(method=RequestMethod.GET, value="/load")
-    public ResponseEntity<UserPrincipal> userPrincipalRequest(@RequestParam(value="id") Long id) {
+    public ResponseEntity<User> userPrincipalRequest(@RequestParam(value="id") Long id) {
         logger.info(id.toString());
-        Optional<UserPrincipal> oup = userService.findById(id);              
-        UserPrincipal up = oup.get();
+        Optional<User> oup = userService.findById(id);              
+        User up = oup.get();
         actionService.getPostById(1L);
         actionService.getAllPosts();
         return ResponseEntity.status(HttpStatus.OK).body(up);
