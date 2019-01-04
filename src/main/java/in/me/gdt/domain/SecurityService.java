@@ -12,11 +12,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityService {
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    // @Autowired  private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+    // @Autowired  private UserDetailsService userDetailsService;
 
     private Logger logger = LoggerFactory.getLogger(SecurityService.class);
 
@@ -28,6 +26,7 @@ public class SecurityService {
         return null;
     }
 
+    /*
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
@@ -37,4 +36,5 @@ public class SecurityService {
             logger.debug(String.format("Auto login %s successfully!", username));
         }
     }
+    */
 }

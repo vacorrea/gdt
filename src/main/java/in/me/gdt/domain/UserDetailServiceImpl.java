@@ -16,8 +16,9 @@ import in.me.gdt.domain.model.Role;
 import in.me.gdt.domain.model.User;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
-    @Autowired private UserService userRepository;
+public class UserDetailServiceImpl {
+//public class UserDetailServiceImpl implements UserDetailsService {
+    /*@Autowired private UserService userRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -28,5 +29,5 @@ public class UserDetailServiceImpl implements UserDetailsService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
-    
+    */    
 }

@@ -25,6 +25,7 @@ public class User implements Serializable {
     @Column(name="user_id")
     private Long id;
     private String userName;
+    @Column(length=60)
     private String password;
     @Transient
     private String passwordConfirm;
