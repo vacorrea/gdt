@@ -25,9 +25,9 @@
     - name: copy sb conf 
       copy:         
           src: content/springboot.conf
-          dest: /usr/srv/springboot/springboot.conf
+          dest: /usr/srv/springboot/gdt.conf
     - name: change permissions
-      shell: chown java. /usr/srv/springboot/springboot.conf
+      shell: chown java. /usr/srv/springboot/gdt.conf
 
     
   
