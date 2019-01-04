@@ -13,6 +13,8 @@ import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 @SequenceGenerator(name="postSequence", initialValue=1, allocationSize=100)
 public class Post implements Serializable {
@@ -23,6 +25,7 @@ public class Post implements Serializable {
     private Long id;
     
     @Lob @Column(name="content", length=1024)
+    @Type(type = "org.hibernate.type.TextType")
     private String content;
 
     @Transient private Map<Long, Comment> comments = new HashMap<Long, Comment>();
