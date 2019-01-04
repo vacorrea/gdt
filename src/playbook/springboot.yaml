@@ -8,11 +8,25 @@
   tasks:
     - name: echo 
       shell: echo "hello springboot"    
-        
-    - name: copy env vars 
+    
+    - name: copy sb systemd service
       copy:         
-          src: content/environment
-          dest: /dev/null
+          src: content/springboot.service
+          dest: /etc/systemd/system/springboot.service    
+    - name: daemons reload
+      shell: systemctl daemon-reload
+
+    - name: create sb dir
+      file: 
+        path: /usr/srv/springboot
+        owner: java
+        group: java
+        state: directory
+    - name: copy sb conf 
+      copy:         
+          src: content/springboot.conf
+          dest: /usr/srv/springboot/springboot.conf
+
     
   
 

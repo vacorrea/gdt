@@ -1,0 +1,13 @@
+[Unit]
+Description=springboot
+Requires=network.target
+After=syslog.target network.target
+
+[Service]
+User=java
+ExecStart=/usr/srv/springboot/gdt.jar
+SuccessExitStatus=143
+
+User=redis
+[Install]
+WantedBy=multi-user.target
