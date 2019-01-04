@@ -22,24 +22,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-        auth.
-            inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER").and()
-                .withUser("admin").password("admin").roles("USER","ADMIN");
+        auth
+            .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER")
+                  .and()
+                .withUser("admin").password("admin").roles("USER", "ADMIN");
     }
  
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
           .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/api/**").hasAnyRole("ADMIN","USER")
-                .antMatchers("/restricted/**").hasAuthority("ADMIN").anyRequest()                
-                .authenticated().and().csrf().disable()
-            .formLogin()
-                .loginPage("/login").failureUrl("/login-error");          
+          .anyRequest()
+          .authenticated()
+          .and()
+          .httpBasic();
     }
     @Override
     public void configure(WebSecurity web) throws Exception {
