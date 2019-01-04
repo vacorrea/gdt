@@ -4,7 +4,6 @@ package in.me.gdt;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,7 +35,7 @@ public class RedisTest {
         Assert.assertTrue(redisServer.isActive());
         Comment comment = new Comment(); 
         comment.setContent("lorem ipsum lorem lorem. Lorem ipsum lorem lorem lorem max");
-        comment.setId(1l); comment.setDate(new Date()); comment.setUserMentioned("max");
+        comment.setDate(new Date()); comment.setUserMentioned("max");
         comment.setPostId(1l);
         commentService.save(comment);
         Optional<Comment> opt =  commentService.findById(1l);
