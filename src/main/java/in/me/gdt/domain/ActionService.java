@@ -1,5 +1,7 @@
 package in.me.gdt.domain;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,7 +9,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import in.me.gdt.domain.Post;
-import in.me.gdt.domain.PostService;
 
 @Service
 public class ActionService {
@@ -20,9 +21,18 @@ public class ActionService {
         if(!optPost.isPresent()) 
             throw new IllegalArgumentException();
         post = optPost.get();       
-        Long postid = post.getId();
-        post.setComments(commentService.findByPostId(postid));          
+        Long postid = post.getId();        
+        post.setComments(parseResult(commentService.findAll()));          
         return post;
+    }
+    private Map<Long, Comment> parseResult(Iterable<Comment> iterable) {
+        Map<Long, Comment> map = new HashMap<Long, Comment>();
+        Iterator<Comment> it = iterable.iterator();
+        while(it.hasNext()) {
+            Comment comment = it.next();            
+            map.put(comment.getId(), comment);
+        }
+        return map;
     }
     public List<Post> getAllPosts() {
         List<Post> posts = postService.findAll();

@@ -34,7 +34,7 @@ public class SocialNetworkTest {
 
     @Test public void insertContentTest() throws IllegalArgumentException {
         Comment comment = new Comment();
-        comment.setPostid(1L); comment.setContent(getLoremIpsum());
+        comment.setPostId(1L); comment.setContent(getLoremIpsum());
         commentService.save(comment);       
         logger.info("insertContentTest");
         Post post = actionService.getPostById(1L);

@@ -13,7 +13,7 @@ public class Comment implements Serializable {
     private String userMentioned;
     private Date date;
     // fk 
-    private Long postId;
+    private Long postid;
     
     public Long getId() {
         return id;
