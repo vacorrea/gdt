@@ -22,8 +22,14 @@
       copy:
           src: content/pg_hba.conf
           dest: /var/lib/pgsql/data/pg_hba.conf
+    - name: cp postgres conf
+      copy:
+          src: content/postgresql.conf
+          dest: /var/lib/pgsql/data/postgresql.conf
+
     - name: passwd postgres
       shell: echo "postgres" | passwd --stdin postgres
+      
     - name: start pgsql
       systemd:
           state: started
