@@ -126,6 +126,11 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 	# cp target/gdt-0.0.1-SNAPSHOT.jar  /usr/srv/springboot/gdt.jar    
 	# chmod +x   /usr/srv/springboot/gdt.jar    
 
+== Start manualmente
+
+	# java -jar -Xss256k  -Xms768m  -Xmx768m  /usr/srv/springboot/gdt.jar 
+	
+
 
 == Execute o teste 
 	
@@ -143,8 +148,9 @@ $ ab  -t 60 -n 10000 https:gdt:8443/api/
 	
 	para o teste com apache benchmark utilizei o jsession id. Para pegar acesse o app e realize o login através
 	do browser e procure o cookie jsessionid
-
-	# ab -t 60 -n 5000 -C JSESSIONID=C210023778ED5D99A191A1551EACB877  https://gdt:8443/api/load?id=201
+	
+	# ab -t 60 -n 1000 -c 10 -C JSESSIONID=ABC9E505032EE7891DD35E1568D18CAB -v 2 https://gdt:8443/api/load?id=1 > ab1.out
+	
 
 	
 

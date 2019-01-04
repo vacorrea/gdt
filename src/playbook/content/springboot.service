@@ -4,6 +4,7 @@ Requires=network.target
 After=syslog.target network.target
 [Service]
 User=java
+EnvironmentFile=-/usr/srv/springboot/gdt.conf
 ExecStart=/usr/srv/springboot/gdt.jar
 SuccessExitStatus=143
 [Install]
