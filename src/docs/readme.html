@@ -453,6 +453,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_copiar_artefato">Copiar artefato</a></li>
+<li><a href="#_start_do_servico">Start do servico</a></li>
 <li><a href="#_execute_o_teste">Execute o teste</a></li>
 <li><a href="#_logs_misc_aka_mynotes">logs misc aka mynotes</a>
 <ul class="sectlevel2">
@@ -692,6 +693,18 @@ Para tal altere o CN e execute:
 </div>
 </div>
 <div class="sect1">
+<h2 id="_start_do_servico">Start do servico</h2>
+<div class="sectionbody">
+<div class="literalblock">
+<div class="content">
+<pre># systemctl start springboot
+ou
+# java -jar -Xss256k  -Xms768m  -Xmx768m  /usr/srv/springboot/gdt.jar</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_execute_o_teste">Execute o teste</h2>
 <div class="sectionbody">
 <div class="literalblock">
@@ -723,7 +736,7 @@ do browser e procure o cookie jsessionid</pre>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre># ab -t 60 -n 5000 -C JSESSIONID=C210023778ED5D99A191A1551EACB877  https://gdt:8443/api/load?id=201</pre>
+<pre># ab -t 60 -n 1000 -c 100 -C JSESSIONID=974EFE5F30085892D2F734EBC0F9E085 -v 2 https://gdt:8443/api/load?id=1 &gt; ab.out</pre>
 </div>
 </div>
 </div>
@@ -850,7 +863,7 @@ WARNING: The median and mean for the processing time are not within a normal dev
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2019-01-04 00:16:00 -02
+Last updated 2019-01-04 01:12:36 -02
 </div>
 </div>
 </body>
