@@ -1,7 +1,7 @@
 insert into role (role_id, name) values (nextval('role_sequence'),'USER');
 insert into role (role_id, name) values (nextval('role_sequence'),'ADMIN');
 
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'jax teller', 'jax@yahoo.com');
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'jax teller', '$2y$10$VidOzZ3anvtJwnXwktq7X.sYsK4qCXJuB6psuue4sL/8ATZFG.1TG');  --jax@yahoo.com
 insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'roman polansky', 'rompo@gmail.com');
 insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'anne hataway', 'anne@live.com');
 insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'jonny depp', 'jonny@depp.com');

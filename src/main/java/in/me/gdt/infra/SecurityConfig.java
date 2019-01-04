@@ -1,18 +1,24 @@
 package in.me.gdt.infra;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-/*
 @Configuration
 @EnableWebSecurity
-*/
-public class SecurityConfig {
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Autowired DataSource dataSourceSecurity;
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.jdbcAuthentication().dataSource(dataSourceSecurity).usersByUsernameQuery("select user_name, password, true from appuser where user_name=?")
+                .authoritiesByUsernameQuery(
+                        "select au.user_name, r.name from user_role ur join appuser au on (au.user_id=ur.user_id) join role r on (r.role_id=ur.role_id) where au.user_name=?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
     /*
     @Bean

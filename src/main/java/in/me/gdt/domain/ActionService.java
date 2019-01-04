@@ -5,12 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import in.me.gdt.domain.model.Role;
 import in.me.gdt.domain.model.User;
 
 @Service
@@ -19,7 +15,7 @@ public class ActionService {
     @Autowired private CommentService commentService;
     @Autowired private UserService userService;
     @Autowired private RoleService roleService;
-    @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     public Post getPostById(Long id) throws IllegalArgumentException {
         Optional<Post> optPost = postService.findById(id); 
@@ -52,11 +48,12 @@ public class ActionService {
     public User findUserByEmail(String name) {
         return userService.findByUserName(name);
     }
-    public void save(User user) {
+    /*public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.getRoles().add(new Role(1L, "ADMIN"));
         userService.save(user);
     }
+    */
     public User findByUsername(String username) {
         return userService.findByUserName(username);
     }
