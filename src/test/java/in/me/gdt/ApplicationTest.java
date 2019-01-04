@@ -38,11 +38,11 @@ public class ApplicationTest {
 		
 		Optional<User> b = userService.findById(1L);
 		Assert.assertTrue(b.isPresent());
-		logger.info(b.get().getUserName());
+		logger.info(b.get().getUsername());
 	}
 	@Test
 	public void whenUserDoesntExistsTest() {
-		Optional<UserPrincipal> oup = userService.findById(9999999L);
+		Optional<User> oup = userService.findById(9999999L);
 		Assert.assertFalse(oup.isPresent());
 	}
 	
