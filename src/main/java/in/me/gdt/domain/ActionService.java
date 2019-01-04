@@ -19,8 +19,9 @@ public class ActionService {
         Post post = null;
         if(!optPost.isPresent()) 
             throw new IllegalArgumentException();
-        post = optPost.get();        
-        post.setComments(commentService.findByPostId(post.getId()));          
+        post = optPost.get();       
+        Long postid = post.getId();
+        post.setComments(commentService.findByPostId(postid));          
         return post;
     }
     public List<Post> getAllPosts() {

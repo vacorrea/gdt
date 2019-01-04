@@ -51,7 +51,7 @@ public class RestService {
         Optional<UserPrincipal> oup = userService.findById(id);              
         UserPrincipal up = oup.get();
         actionService.getPostById(1L);
-        //actionService.getAllPosts();
+        actionService.getAllPosts();
         return ResponseEntity.status(HttpStatus.OK).body(up);
     }
     

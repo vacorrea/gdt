@@ -13,7 +13,7 @@ public class Comment implements Serializable {
     private String userMentioned;
     private Date date;
     // fk 
-    private Long postid;
+    private Long postId;
     
     public Long getId() {
         return id;
@@ -33,10 +33,10 @@ public class Comment implements Serializable {
     public void setUserMentioned(String userMentioned) {
         this.userMentioned = userMentioned;
     }
-    public Long getPostid() {
+    public Long getPostId() {
         return postid;
     }
-    public void setPostid(Long postid) {
+    public void setPostId(Long postid) {
         this.postid = postid;
     }
     public String getContent() {
