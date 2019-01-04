@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 
 public interface CommentService extends CrudRepository<Comment, Long> {
-    Map<Long, Comment> findByPostId(Long id);
+    Map<Long, Comment> findByPostId(Long postid);
 }
