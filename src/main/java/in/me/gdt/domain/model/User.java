@@ -3,6 +3,7 @@ package in.me.gdt.domain.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,19 +16,22 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "user")
+@Table(name = "appuser")
 @SequenceGenerator(name="userSequence", initialValue=1, allocationSize=10)
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="userSequence")
+    @Column(name="user_id")
     private Long id;
-    private String username;
+    private String userName;
     private String password;
     @Transient
     private String passwordConfirm;
     @OneToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "roleid"))
+    @JoinTable(name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     
@@ -38,10 +42,10 @@ public class User implements Serializable {
         this.id = id;
     }
     public String getUsername() {
-        return username;
+        return userName;
     }
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
     public String getPassword() {
         return password;

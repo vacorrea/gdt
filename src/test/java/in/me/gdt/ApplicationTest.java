@@ -33,9 +33,9 @@ public class ApplicationTest {
         //Assert.assertNotNull(up);
         //Assert.assertEquals("max", up.getUserName());
 		
-		Optional<User> b = userService.findById(1L);
-		Assert.assertTrue(b.isPresent());
-		logger.info(b.get().getUsername());
+		//Optional<User> b = userService.findById(1L);
+		//Assert.assertTrue(b.isPresent());
+		//logger.info(b.get().getUsername());
 	}
 	@Test
 	public void whenUserDoesntExistsTest() {
