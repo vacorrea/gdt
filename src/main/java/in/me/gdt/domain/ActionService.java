@@ -7,13 +7,19 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import in.me.gdt.domain.Post;
+
+import in.me.gdt.domain.model.Role;
+import in.me.gdt.domain.model.User;
 
 @Service
 public class ActionService {
     @Autowired private PostService postService;
     @Autowired private CommentService commentService;
+    @Autowired private UserService userService;
+    @Autowired private RoleService roleRepository;
+    @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Post getPostById(Long id) throws IllegalArgumentException {
         Optional<Post> optPost = postService.findById(id); 
@@ -42,5 +48,13 @@ public class ActionService {
         postService.save(post);
         for(Map.Entry<Long, Comment> entry : post.getComments().entrySet())
             commentService.save(entry.getValue());        
+    }
+    public User findUserByEmail(String name) {
+        return userService.findByUserName(name);
+    }
+    public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));         
+        user.getRoles().add(new Role(1L, "ADMIN"));
+        userService.save(user);
     }
 }

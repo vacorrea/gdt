@@ -6,6 +6,9 @@ After=syslog.target network.target
 User=java
 EnvironmentFile=-/usr/srv/springboot/gdt.conf
 ExecStart=/usr/java/jdk/bin/java -jar -Xss256k -Xms256m  -Xmx512m /usr/srv/springboot/gdt.jar
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=springboot
 SuccessExitStatus=143
 [Install]
 WantedBy=multi-user.target
