@@ -27,8 +27,7 @@ public class RestService {
     @Autowired private ActionService actionService;    
     
     @RequestMapping(method=RequestMethod.GET, value="/action")
-    public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {       
-        logger.info(postid.toString());        
+    public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {            
         Post post = actionService.getPostById(postid);
         return ResponseEntity.status(HttpStatus.OK).body(post.toString());
     }

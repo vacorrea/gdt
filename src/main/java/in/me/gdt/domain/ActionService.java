@@ -10,23 +10,19 @@ import org.springframework.stereotype.Service;
 
 import in.me.gdt.domain.model.Comment;
 import in.me.gdt.domain.model.Post;
-import in.me.gdt.domain.model.User;
 
 @Service
 public class ActionService {
     @Autowired private PostService postService;
     @Autowired private CommentService commentService;
     @Autowired private UserService userService;
-    @Autowired private RoleService roleService;
 
 
     public Post getPostById(Long id) throws IllegalArgumentException {
-        Optional<Post> optPost = postService.findById(id); 
-        Post post = null;
+        Optional<Post> optPost = postService.findById(id);         
         if(!optPost.isPresent()) 
             throw new IllegalArgumentException();
-        post = optPost.get();       
-        Long postid = post.getId();        
+        Post post = optPost.get();                      
         post.setComments(parseResult(commentService.findAll()));          
         return post;
     }
@@ -47,17 +43,5 @@ public class ActionService {
         postService.save(post);
         for(Map.Entry<Long, Comment> entry : post.getComments().entrySet())
             commentService.save(entry.getValue());        
-    }
-    public User findUserByEmail(String name) {
-        return userService.findByUserName(name);
-    }
-    /*public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.getRoles().add(new Role(1L, "ADMIN"));
-        userService.save(user);
-    }
-    */
-    public User findByUsername(String username) {
-        return userService.findByUserName(username);
     }
 }

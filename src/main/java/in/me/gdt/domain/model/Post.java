@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Type;
 
 @Entity
-@SequenceGenerator(name="postSequence", initialValue=1, allocationSize=100)
+@SequenceGenerator(name="postSequence", initialValue=1, allocationSize=10)
 public class Post implements Serializable {
     private static final long serialVersionUID = 1L;
 
