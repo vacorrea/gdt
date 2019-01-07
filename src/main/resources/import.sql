@@ -1,12 +1,12 @@
 insert into role (role_id, name) values (nextval('role_sequence'),'USER');
 insert into role (role_id, name) values (nextval('role_sequence'),'ADMIN');
 
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'jax teller', '$2y$10$VidOzZ3anvtJwnXwktq7X.sYsK4qCXJuB6psuue4sL/8ATZFG.1TG');  --jax@yahoo.com
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'roman polansky', 'rompo@gmail.com');
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'anne hataway', 'anne@live.com');
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'jonny depp', 'jonny@depp.com');
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'malcom x', 'malconx@live.com');
-insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'admin', '$2y$10$ZBzAwNASpRU0k5kaNpaKkuu3btzucKGJQZAi1c9GjYGTRIYetkKyO');
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'jaxteller', '$2y$10$VidOzZ3anvtJwnXwktq7X.sYsK4qCXJuB6psuue4sL/8ATZFG.1TG');  --jax@yahoo.com
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'romanpolansky', '$2y$10$07qR0BoSboN1O4etl0LeYecT9.9DYmFoTZzMFi0pz/xI2l/m7TuWa'); --rompo@gmail.com
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'annehataway', '$2y$10$OI3GF1GPwTTVAa7qaoYsFObtw3l1UCUUC9pO2VhqrHOf.ei1T3sp.'); --anne@live.com
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'jonnydepp', '$2y$10$opifyGB/pPCS1KgNp76Ns.Nx.QjbEUBq4LCK/.GV5jERKzHXNSkNi'); --jonny@depp.com
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'), 'malcomx', '$2y$10$hVshJlllQSUFyHmNqSODueTeMvDbhz0bvKqnUUxPrB45xk1WFVHna'); --malconx@live.com
+insert into appuser (user_id, user_name, password) values (nextval('user_sequence'),'admin', '$2y$10$ZBzAwNASpRU0k5kaNpaKkuu3btzucKGJQZAi1c9GjYGTRIYetkKyO'); -- admin
 
 insert into user_role (user_id, role_id) values (1,1);
 insert into user_role (user_id, role_id) values (1,11);

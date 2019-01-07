@@ -31,11 +31,10 @@ public class ApplicationTest {
             logger.info(var.toString());
     }
     @Test
-    public void testFindUserByEmail() {		
-		User user = userService.findByUserName("jonny depp");		        
-        Assert.assertEquals("jonny@depp.com", user.getPassword());
-    }
-
+    public void testFindUserByName() {		    
+		User user = userService.findByUserName("jonnydepp");		        
+        Assert.assertEquals("jonnydepp",user.getUsername());
+    }   
     @Test
     public void searchByPassTest() {
         User user = UserBuilder.newInstance().userName("user"+RandomString.make(10))
