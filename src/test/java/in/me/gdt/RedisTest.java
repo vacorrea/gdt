@@ -37,12 +37,12 @@ public class RedisTest {
         Assert.assertTrue(redisServer.isActive());
         Comment comment = new Comment(); 
         comment.setContent(createRandomLoremIpsum(RandomString.make(10)));
-        comment.setDate(new Date()); comment.setUserMentioned("max");
+        comment.setDate(new Date()); comment.setUserMentioned("anne hataway");
         comment.setPostId(1l);
         commentService.save(comment);
         Optional<Comment> opt =  commentService.findById(1l);
         Assert.assertTrue(opt.isPresent());
-        Assert.assertEquals("max", opt.get().getUserMentioned());
+        Assert.assertEquals("anne hataway", opt.get().getUserMentioned());
         logger.info(opt.get().getContent());
     }    
     private String createRandomLoremIpsum(String string) {
