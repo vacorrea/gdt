@@ -34,7 +34,9 @@ public class RedisTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
 
     @Test public void lookupTest() {
-        Assert.assertTrue(redisServer.isActive());
+        Assert.assertTrue(redisServer.isActive());        
+    }    
+    public void createContentTest() {
         Comment comment = new Comment(); 
         comment.setContent(createRandomLoremIpsum(RandomString.make(10)));
         comment.setDate(new Date()); comment.setUserMentioned("anne hataway");
@@ -44,7 +46,8 @@ public class RedisTest {
         Assert.assertTrue(opt.isPresent());
         Assert.assertEquals("anne hataway", opt.get().getUserMentioned());
         logger.info(opt.get().getContent());
-    }    
+    }
+    
     private String createRandomLoremIpsum(String string) {
         return string + RandomString.make(20) + string + RandomString.make(10);
     }
