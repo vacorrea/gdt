@@ -25,17 +25,11 @@ import redis.embedded.RedisServer;
 @SpringBootTest
 public class RedisTest {    
     
-    private RedisServer redisServer;
-    @Value("${spring.redis.port}")
-    private int port;
 
     @Autowired 
     private CommentService commentService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
-
-    @Test public void lookupTest() {
-        Assert.assertTrue(redisServer.isActive());        
-    }    
+    
     public void createContentTest() {
         Comment comment = new Comment(); 
         comment.setContent(createRandomLoremIpsum(RandomString.make(10)));
@@ -51,13 +45,5 @@ public class RedisTest {
     private String createRandomLoremIpsum(String string) {
         return string + RandomString.make(20) + string + RandomString.make(10);
     }
-    @Before
-    public void startServer() throws IOException {        
-        this.redisServer = new RedisServer(port);
-        redisServer.start();
-    }    
-    @After
-    public void stopServer() {
-        redisServer.stop();
-    }    
+    
 }
