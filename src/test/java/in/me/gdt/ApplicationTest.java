@@ -6,15 +6,11 @@ import java.util.logging.Logger;
 
 import org.assertj.core.internal.bytebuddy.utility.RandomString;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import in.me.gdt.domain.RoleService;
 import in.me.gdt.domain.UserService;
 import in.me.gdt.domain.model.Role;
 import in.me.gdt.domain.model.User;

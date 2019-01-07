@@ -4,6 +4,7 @@ package in.me.gdt;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import in.me.gdt.domain.Comment;
 import in.me.gdt.domain.CommentService;
+import in.me.gdt.domain.model.Comment;
+import net.bytebuddy.utility.RandomString;
 import redis.embedded.RedisServer;
 
 @RunWith(SpringRunner.class)
@@ -28,13 +29,14 @@ public class RedisTest {
     @Value("${spring.redis.port}")
     private int port;
 
-    @Autowired private CommentService commentService;
+    @Autowired 
+    private CommentService commentService;
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
 
     @Test public void lookupTest() {
         Assert.assertTrue(redisServer.isActive());
-        /* Comment comment = new Comment(); 
-        comment.setContent("lorem ipsum lorem lorem. Lorem ipsum lorem lorem lorem max");
+        Comment comment = new Comment(); 
+        comment.setContent(createRandomLoremIpsum(RandomString.make(10)));
         comment.setDate(new Date()); comment.setUserMentioned("max");
         comment.setPostId(1l);
         commentService.save(comment);
@@ -42,9 +44,10 @@ public class RedisTest {
         Assert.assertTrue(opt.isPresent());
         Assert.assertEquals("max", opt.get().getUserMentioned());
         logger.info(opt.get().getContent());
-        */
     }    
-    
+    private String createRandomLoremIpsum(String string) {
+        return string + RandomString.make(20) + string + RandomString.make(10);
+    }
     @Before
     public void startServer() throws IOException {        
         this.redisServer = new RedisServer(port);

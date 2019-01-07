@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import in.me.gdt.domain.model.Comment;
+import in.me.gdt.domain.model.Post;
 import in.me.gdt.domain.model.User;
 
 @Service

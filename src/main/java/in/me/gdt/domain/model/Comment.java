@@ -1,4 +1,4 @@
-package in.me.gdt.domain;
+package in.me.gdt.domain.model;
 
 import java.io.Serializable;
 import java.util.Date;
