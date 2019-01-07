@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Map.Entry;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import in.me.gdt.domain.ActionService;
 import in.me.gdt.domain.UserService;
+import in.me.gdt.domain.model.Comment;
 import in.me.gdt.domain.model.Post;
 import in.me.gdt.domain.model.User;
 
@@ -29,6 +32,8 @@ public class RestService {
     @RequestMapping(method=RequestMethod.GET, value="/action")
     public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {            
         Post post = actionService.getPostById(postid);
+        for(Entry<Long, Comment> entry : post.getComments().entrySet())
+            logger.info(entry.getKey() + " - " + entry.getValue());
         return ResponseEntity.status(HttpStatus.OK).body(post.toString());
     }
     @RequestMapping(method=RequestMethod.GET, value="/action/search")
