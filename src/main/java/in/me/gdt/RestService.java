@@ -37,12 +37,6 @@ public class RestService {
         Post post = actionService.getPostById(postId);
         return ResponseEntity.status(HttpStatus.OK).body(post.toString());
     }
-
-    @RequestMapping(method=RequestMethod.GET, value="/login")
-    public ResponseEntity<String> loginRequest(@RequestParam(value="userName", defaultValue="login") String userName) {
-        logger.info(userName);
-        return ResponseEntity.status(HttpStatus.OK).body(userName);
-    }
     @RequestMapping(method=RequestMethod.GET, value="/load")
     public ResponseEntity<User> userPrincipalRequest(@RequestParam(value="id") Long id) {
         logger.info(id.toString());

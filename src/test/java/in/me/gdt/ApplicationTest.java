@@ -41,8 +41,8 @@ public class ApplicationTest {
     }
 
     @Test
-    public void userCreationTestByPass() {
-        User user = UserBuilder.newInstance().userName(RandomString.make(10))
+    public void searchByPassTest() {
+        User user = UserBuilder.newInstance().userName("user"+RandomString.make(10))
 				.userPasswdHash(createCryptPass()).userRole(new Role(1L, "USER")).build();                
         user = userService.save(user);        
         Assert.assertTrue(user.getPassword().equals(user.getPassword()));
