@@ -20,19 +20,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select au.user_name, r.name from user_role ur join appuser au on (au.user_id=ur.user_id) join role r on (r.role_id=ur.role_id) where au.user_name=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
-    /*
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-             User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
-}
-
-*/
+    
 }

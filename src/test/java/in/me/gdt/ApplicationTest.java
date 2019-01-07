@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import org.assertj.core.internal.bytebuddy.utility.RandomString;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import in.me.gdt.domain.RoleService;
@@ -19,6 +19,7 @@ import in.me.gdt.domain.UserService;
 import in.me.gdt.domain.model.Role;
 import in.me.gdt.domain.model.User;
 import in.me.gdt.domain.model.UserBuilder;
+import in.me.gdt.infra.BCryptPasswordEncoder;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,7 +27,6 @@ public class ApplicationTest {
 	
 	private Logger logger = Logger.getLogger(ApplicationTest.class.getName());
 	@Autowired private UserService userService;		
-	@Mock private BCryptPasswordEncoder mockBCryptPasswordEncoder;
 	
     @Test public void databaseTest() {
         logger.info("databaseTest \n\n");
@@ -41,22 +41,26 @@ public class ApplicationTest {
     }
 
     @Test
-    public void userCreationTest() {
-        User user = UserBuilder.newInstance().userId(1L).userName("hulk banner")
-				.userPasswdHash("hulk@banner.com").userRole(new Role(1L, "USER")).build();                
+    public void userCreationTestByPass() {
+        User user = UserBuilder.newInstance().userName(RandomString.make(10))
+				.userPasswdHash(createCryptPass()).userRole(new Role(1L, "USER")).build();                
         user = userService.save(user);        
-        Assert.assertTrue(user.getPassword().equals("hulk@banner.com"));
+        Assert.assertTrue(user.getPassword().equals(user.getPassword()));
     }
-	//@Test public void userCreationTest() {
-        //userService.save(UserPrincipalBuilder.newInstance().userName("max").userPasswdHash("hxcsao1283").build());
-        //UserPrincipal up = userService.findByUserName("max");
-        //Assert.assertNotNull(up);
-        //Assert.assertEquals("max", up.getUserName());
-		
-		//Optional<User> b = userService.findById(1L);
-		//Assert.assertTrue(b.isPresent());
-		//logger.info(b.get().getUsername());
-	//}
+	@Test public void userCreationTest() {
+        User user =  UserBuilder.newInstance().userName("user" + RandomString.make(10)).userPasswdHash(createCryptPass())
+                    .userRole(new Role(11L, "ADMIN")).build();
+        user = userService.save(user);
+        User up = userService.findByUserName(user.getUsername());        
+        Assert.assertNotNull(up);	
+		Optional<User> b = userService.findById(user.getId());
+		Assert.assertTrue(b.isPresent());
+		logger.info(b.get().getUsername());
+    }
+    private String createCryptPass() {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        return bcrypt.encode("pass"+RandomString.make(10));
+    }
 	@Test
 	public void whenUserDoesntExistsTest() {
 		Optional<User> oup = userService.findById(9999999L);
