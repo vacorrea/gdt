@@ -43,7 +43,9 @@ public class RedisTest {
     }
     
     private String createRandomLoremIpsum(String string) {
-        return string + RandomString.make(20) + string + RandomString.make(10);
+        return string + "lorem ipsum lorem lorem ipsum " +
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque " +
+           RandomString.make(20) + string + RandomString.make(10);
     }
     
 }
