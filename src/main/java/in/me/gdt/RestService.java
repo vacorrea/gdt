@@ -23,8 +23,6 @@ public class RestService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());    
     @Autowired private UserService userService;    
     @Autowired private ActionService actionService;    
-
-    // TODO BCryptPasswordEncoder passwordEncoder; 
     
     @RequestMapping(method=RequestMethod.GET, value="/action")
     public ResponseEntity<String> actionRequest(@RequestParam(value="id", defaultValue="1") Long postid) {       
