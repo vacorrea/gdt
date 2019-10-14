@@ -1,4 +1,4 @@
-= gdt setup globo.com
+= gdt setup 
 vcorrea  <vtcorrea@redhat.com>
 v1.0, 2018-31-12
 :toc: left
